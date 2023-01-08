@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"stdio.h": "c",
+		"ft_screen.h": "c",
+		"ft_rt.h": "c",
+		"stdlib.h": "c",
+		"ft_param.h": "c",
+		"ft_minirt_tool.h": "c",
+		"math.h": "c",
+		"ft_matrix.h": "c",
+		"ft_vector.h": "c"
+	}
+}
