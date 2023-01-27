@@ -8,7 +8,7 @@
 			"name": "(lldb) 시작",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/a.out",
+			"program": "${workspaceFolder}/minirt",
 			"args": ["/Users/intra42/Desktop/minirt/file.rt"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",

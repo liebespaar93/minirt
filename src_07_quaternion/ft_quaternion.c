@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:37:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/08 00:39:46 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/26 14:17:02 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ t_quaternion	ft_quaternion_normalize(t_quaternion q)
  * @ref https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
  * @return t_quaternion
  */
-t_quaternion	ft_quaternion_euler_from_angles(t_angles angles)
+t_quaternion	ft_quaternion_from_euler_angles(t_vec3 angles)
 {
 	t_quaternion	q;
-	t_angles		c;
-	t_angles		s;
+	t_vec3		c;
+	t_vec3		s;
 	
 	c.x = cos(angles.x * 0.5);
 	s.x = sin(angles.x * 0.5);
@@ -80,10 +80,10 @@ t_quaternion	ft_quaternion_euler_from_angles(t_angles angles)
 	c.z = cos(angles.z * 0.5);
 	s.z = sin(angles.z * 0.5);
 
+	q.w = c.x * c.y * c.z + s.x * s.y * s.z;
 	q.x = s.x * c.y * c.z - c.x * s.y * s.z;
     q.y = c.x * s.y * c.z + s.x * c.y * s.z;
 	q.z = c.x * c.y * s.z - s.x * s.y * c.z;
-	q.w = c.x * c.y * c.z + s.x * s.y * s.z;
 
 	return (q);
 }
@@ -93,29 +93,23 @@ t_quaternion	ft_quaternion_euler_from_angles(t_angles angles)
  * 
  * @param q 
  * @ref https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
- * @return t_angles 
+ * @return t_vec3 
  */
-t_angles	ft_quaternion_euler_to_angles(t_quaternion q)
+t_vec3	ft_quaternion_to_euler_angles(t_quaternion q)
 {
-	t_angles	angles;
-	t_angles	c;
-	t_angles	s;
+	t_vec3	angles;
+	t_vec3	c;
+	t_vec3	s;
 
 	s.x = 2.0 * (q.w * q.x + q.y * q.z);
 	c.x = 1.0 - 2.0 * (q.x * q.x + q.y * q.y);
 	angles.x = atan2(s.x, c.x);
 	
-	// s.y = 2.0 * (q.w * q.y - q.z * q.x);
-	// if (fabs(s.y) >= 1)
-	// 	axis.y = copysign(M_PI / 2, s.y);
-	// else
-	// 	axis.y = asin(s.y);
-	s.y = sqrt(1 + 2 * (q.w * q.y - q.x * q.z));
-	c.y = sqrt(1 - 2 * (q.w * q.y - q.x * q.z));
-
-    angles.y = 2 * atan2(s.y, c.y) - M_PI / 2;
-
-
+	s.y = 2.0 * (q.w * q.y - q.z * q.x);
+	if (fabs(s.y) >= 1)
+		angles.y = copysign(M_PI / 2.0, s.y);
+	else
+		angles.y = asin(s.y);
 
 	s.z = 2 * (q.w * q.z + q.x * q.y);
 	c.z = 1 - 2 * (q.y * q.y + q.z * q.z);
@@ -124,15 +118,16 @@ t_angles	ft_quaternion_euler_to_angles(t_quaternion q)
 	return (angles);
 }
 
+
 /**
  * @brief 
  * 
- * @param t_angles 
+ * @param t_vec3 
  * @param angle 
  * @ref http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/
  * @return t_quaternion 
  */
-t_quaternion	ft_quaternion_axis_from_angle(t_angles axis, double angle)
+t_quaternion	ft_quaternion_axis_from_angle(t_vec3 axis, double angle)
 {
 	t_quaternion	q;
 	double			s;
@@ -150,17 +145,16 @@ t_quaternion	ft_quaternion_axis_from_angle(t_angles axis, double angle)
  * 
  * @param q 
  * @ref http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToAngle/
- * @return t_angles 
+ * @return t_vec3 
  */
-t_angles	ft_quaternion_axis_to_angles(t_quaternion q)
+t_vec3	ft_quaternion_axis_to_angles(t_quaternion q, double *angle)
 {
-	t_angles	axis;
-	double		angle;
+	t_vec3	axis;
 	double		divider;
 
 	if (q.w > 1.0)
 		q = ft_quaternion_normalize(q);
-	angle = 2.0 * acos(q.w);
+	*angle = 2.0 * acos(q.w);
 	divider = sqrt(1.0 - q.w * q.w);
 	if (divider < 0.001)
 	{
@@ -179,7 +173,7 @@ t_angles	ft_quaternion_axis_to_angles(t_quaternion q)
 
 t_quaternion	ft_quaternion_rotation_x(double angle)
 {
-	t_angles	axis;
+	t_vec3	axis;
 
 	axis.x = 1;
 	axis.y = 0;
@@ -189,7 +183,7 @@ t_quaternion	ft_quaternion_rotation_x(double angle)
 
 t_quaternion	ft_quaternion_rotation_y(double angle)
 {
-	t_angles	axis;
+	t_vec3	axis;
 
 	axis.x = 0;
 	axis.y = 1;
@@ -199,7 +193,7 @@ t_quaternion	ft_quaternion_rotation_y(double angle)
 
 t_quaternion	ft_quaternion_rotation_z(double angle)
 {
-	t_angles	axis;
+	t_vec3	axis;
 
 	axis.x = 0;
 	axis.y = 0;

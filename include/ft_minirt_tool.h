@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:54:18 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/12/29 13:22:40 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/27 14:01:44 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int		ft_atoi(const char *str);
 double	ft_atof(const char *str);
 
 void	ft_exit_error(int error);
+void	ft_exit_print_error(int error, char *str);
 
 #endif

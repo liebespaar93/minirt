@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:41:15 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/04 17:42:00 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/12 14:35:12 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,6 @@ t_vec2	ft_vector_2(double x, double y)
 	new.x = x;
 	new.y = y;
 	return (new);
-}
-
-t_vec2	ft_vec2_sum(t_vec2 v2_1, t_vec2 v2_2)
-{
-	v2_1.x += v2_2.x;
-	v2_1.y += v2_2.y;
-	return (v2_1);
-}
-
-t_vec2	ft_vec2_mult(t_vec2 v2, double scalar)
-{
-	v2.x *= scalar;
-	v2.y *= scalar;
-	return (v2);
 }
 
 double	ft_vec2_length(t_vec2 v2)

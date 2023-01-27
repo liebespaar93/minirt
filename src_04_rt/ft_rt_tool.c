@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 13:42:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/12/26 14:27:09 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/27 12:49:44 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 int	ft_color_check(int color)
 {
 	if (!(0 <= color && color < 256))
-		ft_exit_error(EBADF);
+		ft_exit_print_error(EBADF, "ft_color_check()");
 	return (color);	
 }
 
@@ -31,7 +31,7 @@ int	ft_rt_color(char *str)
 
 	temp = ft_split(str, ',');
 	if (ft_ptrlen((void **)&temp, "char **") != 3)
-		ft_exit_error(EBADF);
+		ft_exit_print_error(EBADF, "ft_rt_color()");
 	color.integer = 0;
 	color.bit.r = ft_color_check(ft_atoi(temp[0]));
 	color.bit.g = ft_color_check(ft_atoi(temp[1]));
@@ -47,7 +47,7 @@ t_vec3	ft_rt_vec3(char *str)
 
 	temp = ft_split(str, ',');
 	if (ft_ptrlen((void **)&temp, "char **") != 3)
-		ft_exit_error(EBADF);
+		ft_exit_print_error(EBADF, "ft_rt_vec3()");
 	vec.x = ft_atof(temp[0]);
 	vec.y = ft_atof(temp[1]);
 	vec.z = ft_atof(temp[2]);

@@ -8,6 +8,23 @@
 		"ft_minirt_tool.h": "c",
 		"math.h": "c",
 		"ft_matrix.h": "c",
-		"ft_vector.h": "c"
+		"ft_vector.h": "c",
+		"ft_quaternion.h": "c",
+		"unistd.h": "c",
+		"_size_t.h": "c",
+		"errno.h": "c",
+		"mlx.h": "c",
+		"ft_get_next_line.h": "c",
+		"ft_scene.h": "c",
+		"ft_image.h": "c",
+		"stdbool.h": "c",
+		"__config": "c",
+		"array": "c",
+		"vector": "c",
+		"ft_draw.h": "c",
+		"ft_scene_image.h": "c",
+		"ft_scene_camera.h": "c",
+		"ft_scene_light.h": "c",
+		"mlx_int.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:57:33 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/04 17:11:09 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/26 03:26:00 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,6 @@ t_mtx3	ft_mtx3_shear(double x, double y)
 	new = ft_matrix_3(\
 		(double [3]){1, y, 0}, \
 		(double [3]){x, 1, 0}, \
-		(double [3]){0, 0, 1});
-	return (new);
-}
-
-t_mtx3	ft_mtx3_rotation(double angle)
-{
-	t_mtx3	new;
-	double	s;
-	double	c;
-
-	s = sin(angle);
-	c = cos(angle);
-	new = ft_matrix_3(\
-		(double [3]){c, -s, 0}, \
-		(double [3]){s, c, 0}, \
 		(double [3]){0, 0, 1});
 	return (new);
 }

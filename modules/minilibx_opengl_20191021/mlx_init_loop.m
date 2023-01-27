@@ -190,3 +190,18 @@ int mlx_loop_hook(mlx_ptr_t *mlx_ptr, void (*fct)(void *), void *param)
 
   return (0);
 }
+
+void mlx_del(mlx_ptr_t *mlx_ptr)
+{
+  mlx_img_list_t *font;
+  mlx_img_list_t *temp;
+
+  font = mlx_ptr->font;
+  while (font)
+  {
+    temp = font->next;
+    mlx_destroy_image(mlx_ptr, font);
+    font = temp;
+  }
+  free(mlx_ptr);
+}

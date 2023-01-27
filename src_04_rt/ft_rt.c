@@ -6,10 +6,11 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:06:43 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/12/28 13:28:24 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/27 16:33:14 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <errno.h>
 
 #include "ft_rt.h"
@@ -40,7 +41,7 @@ size_t	ft_rt_len(t_read_file *ft_read_file)
 		else if (*read_line->data == '\n')
 			;
 		else
-			ft_exit_error(EBADF);
+			ft_exit_print_error(EBADF, "ft_rt_len()");
 		read_line = read_line->next;
 	}
 	return (len);
@@ -76,7 +77,7 @@ void	ft_rt_check(t_rt *rt)
 	while (index < 2)
 	{
 		if (checker[index] != 1)
-			ft_exit_error(EBADF);
+			ft_exit_print_error(EBADF, "ft_rt_check()");
 		index++;
 	}
 }
@@ -107,4 +108,35 @@ t_rt	*ft_rt_init(t_read_file *read_file)
 	}
 	ft_rt_check(rt);
 	return (rt);
+}
+
+void	ft_rt_free(t_rt **rt_ptr)
+{
+	t_rt	*rt;
+	int		i;
+
+	if (!rt_ptr)
+		return ;
+	rt = *rt_ptr;
+	i = 0;
+	while (rt[i].type)
+	{
+		if (!ft_strcmp(rt[i].type, "A"))
+			ft_rt_ambient_lightning_free((t_A **)&rt[i].data);
+		else if (!ft_strcmp(rt[i].type, "C"))
+			ft_rt_camera_free((t_C **)&rt[i].data);
+		else if (!ft_strcmp(rt[i].type, "L"))
+			ft_rt_light_free((t_L **)&rt[i].data);
+		else if (!ft_strcmp(rt[i].type, "sp"))
+			ft_rt_sphere_free((t_sp **)&rt[i].data);
+		else if (!ft_strcmp(rt[i].type, "pl"))
+			ft_rt_plane_free((t_pl **)&rt[i].data);
+		else if (!ft_strcmp(rt[i].type, "cy"))
+			ft_rt_cylinder_free((t_cy **)&rt[i].data);
+		rt[i].type = NULL;
+		rt[i].data = NULL;
+		i++;
+	}
+	free(*rt_ptr);
+	*rt_ptr = NULL;
 }

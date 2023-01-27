@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:31:13 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/12/28 13:28:11 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:49:20 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_cy
 
 
 t_rt	*ft_rt_init(t_read_file *read_file);
+void	ft_rt_free(t_rt **rt_ptr);
 
 void ft_rt_addback(t_rt *rt, char *type, void *data);
 
@@ -82,11 +83,17 @@ t_vec3	ft_rt_vec3(char *str);
 
 
 void	ft_rt_ambient_lightning(t_rt *rt, char *str);
+void	ft_rt_ambient_lightning_free(t_A **rt_A_ptr);
 void	ft_rt_camera(t_rt *rt, char *str);
+void	ft_rt_camera_free(t_C **rt_C_ptr);
 void	ft_rt_light(t_rt *rt, char *str);
+void	ft_rt_light_free(t_L **rt_L_ptr);
 void	ft_rt_sphere(t_rt *rt, char *str);
+void	ft_rt_sphere_free(t_sp **rt_sp_ptr);
 void	ft_rt_plane(t_rt *rt, char *str);
+void	ft_rt_plane_free(t_pl **rt_pl_ptr);
 void	ft_rt_cylinder(t_rt *rt, char *str);
+void	ft_rt_cylinder_free(t_cy **rt_cy_ptr);
 
 
 void	ft_rt_printf(t_rt rt);

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:53:48 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/12/26 12:07:10 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:44:31 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 void	ft_rt_cylinder(t_rt *rt, char *str)
 {
 	t_cy	*rt_cy;
-	int		index;
+	//int		index;
 	char	**temp;
 
 	rt_cy = malloc(sizeof(t_cy));
 	if (!rt_cy)
-		ft_exit_error(ENOMEM);
+		ft_exit_print_error(ENOMEM, "ft_rt_cylinder()");
 	temp = ft_split(str, ' ');
 	if (ft_ptrlen((void **)&temp, "char **") != 6)
-		ft_exit_error(EBADF);
+		ft_exit_print_error(EBADF, "ft_rt_cylinder()");
 	rt_cy->type = ft_strdup(temp[0]);
 	rt_cy->coord = ft_rt_vec3(temp[1]);
 	rt_cy->axis = ft_rt_vec3(temp[2]);
@@ -36,4 +36,17 @@ void	ft_rt_cylinder(t_rt *rt, char *str)
 	rt_cy->color.integer = ft_rt_color(temp[5]);
 	ft_split_free(temp);
 	ft_rt_addback(rt, rt_cy->type, (void *)rt_cy);
+}
+
+void	ft_rt_cylinder_free(t_cy **rt_cy_ptr)
+{
+	t_cy	*rt_cy;
+
+	if (!rt_cy_ptr)
+		return ;
+	rt_cy = *rt_cy_ptr;
+	if (rt_cy->type)
+		free(rt_cy->type);
+	free(*rt_cy_ptr);
+	*rt_cy_ptr = NULL;
 }
