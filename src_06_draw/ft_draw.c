@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:25:40 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 19:07:47 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/28 23:27:45 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,15 @@ void	ft_pixel_ray(t_scene *scene, int endian)
 
 	v3_target = ft_vector_3(0.0,0.0,1.0);
 	l=0;
-	while (l < scene->h * scene->w)
+	while (l < (scene->h) * (scene->w))
 	{
 		q = ft_quaternion_from_euler_angles(scene->pixel_axis[l]);
 
 		v3 = ft_quaternion_rotate_vec3(q,v3_target);
-		printf("%+.2f %+.2f %+.2f  ", v3.x, v3.y ,v3.z );
-		if (l % scene->w == 0)
+		if (l && l % (scene->w) == 0)
 			printf("\n");
+		printf("%+.2f %+.2f %+.2f  ", v3.x, v3.y ,v3.z );
+		
 		scene->image->rchannel[l] = 1;
 		scene->image->gchannel[l] = 0;
 		scene->image->bchannel[l] = 0;
