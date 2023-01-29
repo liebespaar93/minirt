@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:02:21 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/28 23:08:06 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:43:22 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define FT_PARAM_H
 
 # ifndef WIN_WIDTH
-# define WIN_WIDTH   10
+# define WIN_WIDTH   1200
 # endif
 
 # ifndef WIN_HEIGHT
-# define WIN_HEIGHT  10
+# define WIN_HEIGHT  700
 # endif
 
 # define SCENE_X		0
@@ -31,6 +31,8 @@
 # include "mlx.h"
 # include "ft_rt.h"
 # include "ft_scene.h"
+# include "ft_mac_keyboard.h"
+# include "ft_mac_mouse.h"
 
 typedef struct s_mlx
 {
@@ -60,6 +62,10 @@ typedef struct s_param
 	t_rt		*rt;
 	
 	t_scene		*scene;
+
+	t_keyboard	*keyboard;
+	t_mouse		*mouse;
+	
 }	t_param;
 
 t_param	*ft_param_init(void);

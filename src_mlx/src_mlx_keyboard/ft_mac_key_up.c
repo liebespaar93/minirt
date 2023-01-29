@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mac_key_up.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:24:08 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/08/08 02:13:22 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 14:49:05 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_mac_keyboard.h>
+#include "ft_mac_keyboard.h"
 
 int	ft_keyup_plus_min(int keycode, t_keyboard *keyboard)
 {

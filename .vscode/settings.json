@@ -25,6 +25,8 @@
 		"ft_scene_image.h": "c",
 		"ft_scene_camera.h": "c",
 		"ft_scene_light.h": "c",
-		"mlx_int.h": "c"
+		"mlx_int.h": "c",
+		"ft_mac_keyboard.h": "c",
+		"ft_mac_mouse.h": "c"
 	}
 }

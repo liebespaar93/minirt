@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:25:40 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/28 23:27:45 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 16:43:10 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_pixel_axis(t_scene *scene)
 	double			angle;
 	int				y, x, l;
 	
-	camera = (t_C *)scene->camera_list->rt[scene->camera_list->index];
+	camera = scene->camera_list->camera;
 	if (scene->w > scene->h)
 		angle = camera->fov / 180.0 / scene->w * M_PI;
 	else
@@ -54,28 +54,101 @@ void	ft_pixel_axis(t_scene *scene)
 
 			v3 = ft_quaternion_to_euler_angles(out_2);
 			scene->pixel_axis[l++] = v3;
-			printf("(%+d, %+d)  ", y, x);
+			// printf("(%+d, %+d)  ", y, x);
 			x++;
 		}
-		printf("\n");
+		//printf("\n");
 		y++;
 	}
-	l=0;
-	y = -scene->h / 2;
-	while (y <= scene->h / 2)
-	{
-		x = -scene->w / 2;
-		while (x <= scene->w / 2)
-		{
-
-			printf("%+.2f %+.2f %+.2f  ", scene->pixel_axis[l].x, scene->pixel_axis[l].y, scene->pixel_axis[l].z );
-			x++;l++;
-		}
-		printf("\n");
-		y++;
-	}
+	// l=0;
+	// y = -scene->h / 2;
+	// while (y <= scene->h / 2)
+	// {
+	// 	x = -scene->w / 2;
+	// 	while (x <= scene->w / 2)
+	// 	{
+	// 		printf("%+.2f %+.2f %+.2f  ", scene->pixel_axis[l].x, scene->pixel_axis[l].y, scene->pixel_axis[l].z );
+	// 		x++;l++;
+	// 	}
+	// 	printf("\n");
+	// 	y++;
+	// }
 }
 
+
+typedef struct s_intersection
+{
+	/* data */
+	t_rt	*obj;
+	t_vec3	int_point;
+	t_vec3	local_normal;
+	t_vec3	color;
+}	t_intersection;
+
+
+#include "ft_rt.h"
+
+bool	ft_scn_obj_intersection(t_scene *scene, int obj_index, t_vec3 *ray_point, t_intersection *intersection)
+{
+	(void)obj_index;
+	(void)intersection;
+	t_vec3	a;
+	double	b;
+	double	c;
+	
+	t_vec3 camera_coord = ((t_C *)scene->camera_list->rt[scene->camera_list->index])->coord;
+
+	a = *ray_point;
+
+	b = 2.0 * ft_vec3_dot(camera_coord, a);
+	c = ft_vec3_dot(camera_coord, camera_coord) - 1.0;
+
+	float int_test = (b * b) - (4.0 * c);
+
+	double num_sqrt;
+	double t1;
+	double t2;
+	t_vec3 point;
+	if (int_test > 0.0)
+	{
+		num_sqrt = sqrt(int_test);
+		t1 = (-b + num_sqrt) / 2.0;
+		t2 = (-b - num_sqrt) / 2.0;
+		if ( (t1 < 0.0) || (t2 < 0.0))
+			return false;
+		if (t1 < t2)
+			point = ft_vec3_add(camera_coord, ft_vec3_mult(a, t1));
+		else
+			point = ft_vec3_add(camera_coord, ft_vec3_mult(a, t2));
+		
+		return true;
+	}
+	return (0);
+}
+
+bool	ft_obj_intersection(t_scene *scene, t_vec3 *ray_point, t_intersection *close)
+{
+	(void)close;
+	t_intersection	intersection;
+	//double	dist;
+	double	min_dist;
+	bool	intersection_found;
+	bool	validint;
+	
+	min_dist = 100000;
+	intersection_found = false;
+
+	ft_memset(&intersection, 0, sizeof(t_intersection));
+
+	int i;
+	i = 0;
+	// while (i < scene->obj_list->max_index)
+	// {
+		validint = ft_scn_obj_intersection(scene, i, ray_point , &intersection);
+	// }
+	return (validint);
+
+}
 
 /**
  * @brief 
@@ -87,25 +160,37 @@ void	ft_pixel_ray(t_scene *scene, int endian)
 {
 	t_quaternion	q;
 	int				l;
-	t_vec3	v3;
+	t_vec3	ray_point;
 	t_vec3	v3_target;
-
+	bool	validint;
 	
-
+	t_intersection	intersection;
+	
 	v3_target = ft_vector_3(0.0,0.0,1.0);
 	l=0;
 	while (l < (scene->h) * (scene->w))
 	{
 		q = ft_quaternion_from_euler_angles(scene->pixel_axis[l]);
 
-		v3 = ft_quaternion_rotate_vec3(q,v3_target);
-		if (l && l % (scene->w) == 0)
-			printf("\n");
-		printf("%+.2f %+.2f %+.2f  ", v3.x, v3.y ,v3.z );
+		ray_point = ft_quaternion_rotate_vec3(q,v3_target);
+		// if (l && l % (scene->w) == 0)
+		// 	printf("\n");
+		// printf("%+.2f %+.2f %+.2f  ", v3.x, v3.y ,v3.z );
 		
-		scene->image->rchannel[l] = 1;
-		scene->image->gchannel[l] = 0;
-		scene->image->bchannel[l] = 0;
+		validint = false;
+		validint = ft_obj_intersection(scene, &ray_point, &intersection);
+		if (validint)
+		{
+			scene->image->rchannel[l] = 0.0;//1.0 * ((l % (scene->w + 1)) / (float)(scene->w + 1));
+			scene->image->gchannel[l] = 0.0;
+			scene->image->bchannel[l] = 1.0 * ((l / (scene->w + 1)) / (float)(scene->h + 1));
+		}
+		l++;
+	}
+	l=0;
+	ft_image_compute_max_values(scene->image);
+	while (l < (scene->h) * (scene->w))
+	{
 		ft_image_convert_color(scene->image, l, endian);
 		l++;
 	}

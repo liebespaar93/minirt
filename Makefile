@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/27 18:16:33 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/29 15:50:53 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,9 @@ SRC_07_QUATERNION_DIR = $(ROOTDIR)/src_07_quaternion
 SRC_TOOL_DIR = $(ROOTDIR)/src_tool
 SRC_VECTOR_DIR = $(ROOTDIR)/src_vector
 SRC_MATRIX_DIR = $(ROOTDIR)/src_matrix
+SRC_MLX_DIR = $(ROOTDIR)/src_mlx
+SRC_MLX_KEYBOARD_DIR = $(SRC_MLX_DIR)/src_mlx_keyboard
+SRC_MLX_MOUSE_DIR = $(SRC_MLX_DIR)/src_mlx_mouse
 
 ## MODULES ##
 MINILIBX_DIR = $(ROOTDIR)/modules/minilibx_opengl_20191021
@@ -142,9 +145,27 @@ SRC_MATRIX_SRC =						\
 				ft_matrix_4.c			\
 				ft_matrix_4_rotation.c	\
 				ft_matrix_4_mult.c		\
-				ft_matrix_4_inverse.c	\
+				ft_matrix_4_inverse.c
 
 SRC_MATRIX_C = $(addprefix $(SRC_MATRIX_DIR)/, $(SRC_MATRIX_SRC))
+
+SRC_MLX_KEYBOARD_SRC =						\
+				ft_mac_key_hold.c			\
+				ft_mac_key_down.c			\
+				ft_mac_key_up.c			\
+				ft_mac_keyboard.c
+
+SRC_MLX_KEYBOARD_C = $(addprefix $(SRC_MLX_KEYBOARD_DIR)/, $(SRC_MLX_KEYBOARD_SRC))
+
+
+SRC_MLX_MOUSE_SRC =						\
+				ft_mac_mouse_down.c			\
+				ft_mac_mouse_drag.c			\
+				ft_mac_mouse_up.c				\
+				ft_mac_mouse.c	
+
+SRC_MLX_MOUSE_C = $(addprefix $(SRC_MLX_MOUSE_DIR)/, $(SRC_MLX_MOUSE_SRC))
+
 
 OBJS =	$(SRC_01_MAIN_C:$(SRC_01_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_02_FD_C:$(SRC_02_FD_DIR)/%.c=$(OBJ_DIR)/%.o)		\
@@ -153,9 +174,11 @@ OBJS =	$(SRC_01_MAIN_C:$(SRC_01_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_05_SCENE_C:$(SRC_05_SCENE_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_06_DRAW_C:$(SRC_06_DRAW_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_07_QUATERNION_C:$(SRC_07_QUATERNION_DIR)/%.c=$(OBJ_DIR)/%.o)	\
-		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)			\
-		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)		\
-		$(SRC_MATRIX_C:$(SRC_MATRIX_DIR)/%.c=$(OBJ_DIR)/%.o)
+		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)				\
+		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)			\
+		$(SRC_MATRIX_C:$(SRC_MATRIX_DIR)/%.c=$(OBJ_DIR)/%.o)			\
+		$(SRC_MLX_KEYBOARD_C:$(SRC_MLX_KEYBOARD_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_MLX_MOUSE_C:$(SRC_MLX_MOUSE_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 OBJS_CLEAN = $(OBJS)
 
@@ -204,6 +227,12 @@ $(OBJ_DIR)/%.o : $(SRC_VECTOR_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_MATRIX_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_MLX_KEYBOARD_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_MLX_MOUSE_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 ## MODULES ##

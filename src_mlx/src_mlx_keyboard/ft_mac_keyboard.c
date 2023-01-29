@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mac_keyboard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:23:44 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/09/13 08:28:06 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 14:48:38 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_mac_keyboard.h>
+#include <errno.h>
+
+#include "ft_mac_keyboard.h"
+#include "ft_minirt_tool.h"
+
+t_keyboard	*ft_keyboard_set()
+{
+	t_keyboard	*keyboard;
+
+	if (!ft_zeromalloc((void **)&keyboard, sizeof(t_keyboard)))
+		ft_exit_print_error(ENOMEM, "ft_keyboard_set()");
+
+	return (keyboard);
+}
 
 int	ft_key_up(int keycode, t_keyboard *keyboard)
 {

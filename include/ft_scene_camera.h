@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:00:11 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 18:36:11 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 15:00:45 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef	struct s_scn_camera
 	int		max_index;
 	
 	t_rt	**rt;
+	
+	t_C		*camera;
 	
 }	t_scn_camera;
 

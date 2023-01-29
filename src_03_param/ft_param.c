@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:58:32 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/28 23:17:59 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 15:41:27 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ t_param	*ft_param_init(void)
 	param->mlx = ft_mlx_set();
 	param->renderer = ft_renderer_set(param->mlx->img_ptr);
 	param->scene = NULL;
+	param->keyboard = ft_keyboard_set();
+	param->mouse = ft_mouse_set();
+
 	return (param);
 }
 

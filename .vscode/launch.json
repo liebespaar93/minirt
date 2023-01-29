@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/minirt",
-			"args": ["/Users/intra42/Desktop/minirt/file.rt"],
+			"args": ["/goinfre/kyoulee/minirt/file.rt"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],

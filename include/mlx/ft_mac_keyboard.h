@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mac_keyboard.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:24:52 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/08/05 22:26:00 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 14:47:34 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ typedef struct s_keyboard
 	int	exit;
 }	t_keyboard;
 
+t_keyboard	*ft_keyboard_set();
+
+/* ft_mac_keyboard */
+int		ft_key_up(int keycode, t_keyboard *keyboard);
+int		ft_key_down(int keycode, t_keyboard *keyboard);
+
 /* ft_mac_key_down.c */
 int		ft_keydown_plus_min(int keycode, t_keyboard *keyboard);
 int		ft_keydown_move(int keycode, t_keyboard *keyboard);
@@ -38,10 +44,6 @@ int		ft_keyup_plus_min(int keycode, t_keyboard *keyboard);
 int		ft_keyup_move(int keycode, t_keyboard *keyboard);
 int		ft_keyup_option(int keycode, t_keyboard *keyboard);
 int		ft_keyup_exit(int keycode, t_keyboard *keyboard);
-
-/* ft_mac_keyboard */
-int		ft_key_up(int keycode, t_keyboard *keyboard);
-int		ft_key_down(int keycode, t_keyboard *keyboard);
 
 /* ft_mac_key_hold */
 void	ft_key_hold(t_keyboard *keyboard);

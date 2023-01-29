@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mac_mouse_down.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:30:33 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/08/23 11:08:45 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 14:49:21 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_mac_mouse.h>
+#include "ft_mac_mouse.h"
 
 int	ft_mouse_down_left(int keycode, int x, int y, t_mouse *mouse)
 {
