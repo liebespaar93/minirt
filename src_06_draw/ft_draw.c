@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:25:40 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/29 16:43:10 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:48:18 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	ft_pixel_axis(t_scene *scene)
 	
 	camera = scene->camera_list->camera;
 	if (scene->w > scene->h)
-		angle = camera->fov / 180.0 / scene->w * M_PI;
+		angle = camera->fov / 360.0 / scene->w * M_PI;
 	else
-		angle = camera->fov / 180.0 / scene->h * M_PI;
+		angle = camera->fov / 360.0 / scene->h * M_PI;
 	
 	q = ft_quaternion_from_euler_angles(camera->axis);
 
@@ -42,10 +42,10 @@ void	ft_pixel_axis(t_scene *scene)
 	t_vec3	v3;
 	l=0;
 	y = -scene->h / 2;
-	while (y <= scene->h / 2)
+	while (y < scene->h / 2)
 	{
 		x = -scene->w / 2;
-		while (x <= scene->w / 2)
+		while (x < scene->w / 2)
 		{
 			r_x = ft_quaternion_rotation_y(x * angle);
 			r_y = ft_quaternion_rotation_x(y * angle);
@@ -95,33 +95,21 @@ bool	ft_scn_obj_intersection(t_scene *scene, int obj_index, t_vec3 *ray_point, t
 	t_vec3	a;
 	double	b;
 	double	c;
+	//t_vec3 obj = ft_vector_3(0,0,0);
 	
-	t_vec3 camera_coord = ((t_C *)scene->camera_list->rt[scene->camera_list->index])->coord;
+	t_vec3 camera_coord = scene->camera_list->camera->coord;
 
-	a = *ray_point;
+	(void)camera_coord;
+	a = ft_vec3_normalize(*ray_point);
 
 	b = 2.0 * ft_vec3_dot(camera_coord, a);
 	c = ft_vec3_dot(camera_coord, camera_coord) - 1.0;
 
-	float int_test = (b * b) - (4.0 * c);
+	double int_test = (b * b) - (4.0 * c);
 
-	double num_sqrt;
-	double t1;
-	double t2;
-	t_vec3 point;
 	if (int_test > 0.0)
 	{
-		num_sqrt = sqrt(int_test);
-		t1 = (-b + num_sqrt) / 2.0;
-		t2 = (-b - num_sqrt) / 2.0;
-		if ( (t1 < 0.0) || (t2 < 0.0))
-			return false;
-		if (t1 < t2)
-			point = ft_vec3_add(camera_coord, ft_vec3_mult(a, t1));
-		else
-			point = ft_vec3_add(camera_coord, ft_vec3_mult(a, t2));
-		
-		return true;
+		return (true);
 	}
 	return (0);
 }
@@ -142,6 +130,7 @@ bool	ft_obj_intersection(t_scene *scene, t_vec3 *ray_point, t_intersection *clos
 
 	int i;
 	i = 0;
+	validint = false;
 	// while (i < scene->obj_list->max_index)
 	// {
 		validint = ft_scn_obj_intersection(scene, i, ray_point , &intersection);
@@ -183,7 +172,14 @@ void	ft_pixel_ray(t_scene *scene, int endian)
 		{
 			scene->image->rchannel[l] = 0.0;//1.0 * ((l % (scene->w + 1)) / (float)(scene->w + 1));
 			scene->image->gchannel[l] = 0.0;
-			scene->image->bchannel[l] = 1.0 * ((l / (scene->w + 1)) / (float)(scene->h + 1));
+			scene->image->bchannel[l] = 1.0;
+		}
+		else
+		{
+
+			scene->image->rchannel[l] = 0.0;//1.0 * ((l % (scene->w + 1)) / (float)(scene->w + 1));
+			scene->image->gchannel[l] = 0.0;
+			scene->image->bchannel[l] = 0.0;
 		}
 		l++;
 	}

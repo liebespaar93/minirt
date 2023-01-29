@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/29 16:41:47 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:34:39 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ int	ft_loop_event(t_param *param)
 {
 	t_C	*camera;
 	camera = param->scene->camera_list->camera;
-	//param->keyboard->y++;
 	if (ft_key_update(param->scene, param->keyboard) || \
 		ft_mouse_update(param->scene, param->mouse))
 	{

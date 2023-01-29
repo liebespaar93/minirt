@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:02:21 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/29 16:43:22 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/29 18:49:44 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # endif
 
 # ifndef WIN_HEIGHT
-# define WIN_HEIGHT  700
+# define WIN_HEIGHT  1200
 # endif
 
 # define SCENE_X		0
