@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:41:30 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 19:11:54 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/30 22:58:26 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_scn_image	*ft_image_set()
 		ft_exit_print_error(ENOMEM, "ft_image_set()");
 	image->x_size = 0;
 	image->y_size = 0;
+	image->buffer_size = 0;
 	image->rchannel = NULL;
 	image->gchannel = NULL;
 	image->bchannel = NULL;
@@ -60,6 +61,7 @@ t_scn_image	*ft_image_init(const int x_size, const int y_size)
 
 	image->x_size = x_size;
 	image->y_size = y_size;
+	image->buffer_size = x_size * y_size;
 
 	if (!ft_zeromalloc((void **)&image->rchannel, sizeof(double) * (x_size * y_size )) || \
 		!ft_zeromalloc((void **)&image->gchannel, sizeof(double) * (x_size * y_size )) || \
@@ -69,94 +71,42 @@ t_scn_image	*ft_image_init(const int x_size, const int y_size)
 	return (image);
 }
 
-int	ft_image_set_pixel(t_scn_image *image, const int x, const int y, const double color[3])
+void	ft_image_set_pixel(t_scn_image *image, const int l, const t_vec3 *color)
 {
-	int	point;
-
-	point = y * image->x_size + x;
-	image->rchannel[point] = color[0];
-	image->gchannel[point] = color[1];
-	image->bchannel[point] = color[2];
-	return (1);
+	image->rchannel[l] = color->x;
+	image->gchannel[l] = color->y;
+	image->bchannel[l] = color->z;
 }
 
-void	ft_image_display(t_scn_image *image, bool endian)
+void	ft_image_unset_pixel(t_scn_image *image, const int l)
 {
-	int	x;
-	int	y;
-
-	ft_image_compute_max_values(image);
-	y = 0;
-	while (y < image->y_size)
-	{
-		x = 0;
-		while (x < image->x_size)
-		{
-			ft_image_convert_color(image, y * image->x_size + x, endian);
-			x++;
-		}
-		y++;
-	}
+	image->rchannel[l] = 0.0;
+	image->gchannel[l] = 0.0;
+	image->bchannel[l] = 0.0;
 }
-
 void	ft_image_convert_color(t_scn_image *image, int point, bool endian)
 {
-
-
 	if (!endian)
 	{
-		image->back_buffer[point].bit.a = (unsigned char)((image->bchannel[point] / image->max_overall) * 255.0);
-		image->back_buffer[point].bit.r = (unsigned char)((image->gchannel[point] / image->max_overall) * 255.0);
-		image->back_buffer[point].bit.g = (unsigned char)((image->rchannel[point] / image->max_overall) * 255.0);
+		image->back_buffer[point].bit.a = (unsigned char)((image->bchannel[point]) * 255.0);
+		image->back_buffer[point].bit.r = (unsigned char)((image->gchannel[point]) * 255.0);
+		image->back_buffer[point].bit.g = (unsigned char)((image->rchannel[point]) * 255.0);
 		image->back_buffer[point].bit.b = 0;
 	}
 	else
 	{
 		image->back_buffer[point].bit.a = 0;
-		image->back_buffer[point].bit.r = (unsigned char)((image->rchannel[point] / image->max_overall) * 255.0);
-		image->back_buffer[point].bit.g = (unsigned char)((image->gchannel[point] / image->max_overall) * 255.0);
-		image->back_buffer[point].bit.b = (unsigned char)((image->bchannel[point] / image->max_overall) * 255.0);
+		image->back_buffer[point].bit.r = (unsigned char)((image->rchannel[point]) * 255.0);
+		image->back_buffer[point].bit.g = (unsigned char)((image->gchannel[point]) * 255.0);
+		image->back_buffer[point].bit.b = (unsigned char)((image->bchannel[point]) * 255.0);
 	}
 }
 
-void	ft_image_compute_max_values(t_scn_image *image)
+void	ft_image_display(t_scn_image *image, bool endian)
 {
-	int x;
-	int y;
-	double	red_value;
-	double	green_value;
-	double	blue_value;
+	int l;
+	l = 0;
 	
-	image->max_red = 0.0;
-	image->max_green = 0.0;
-	image->max_blue = 0.0;
-	image->max_overall = 0.0;
-	y = 0;
-	while (y < image->y_size)
-	{
-		x = 0;
-		while (x < image->x_size)
-		{
-			red_value = image->rchannel[y * image->x_size + x];
-			green_value = image->gchannel[y * image->x_size + x];
-			blue_value = image->bchannel[y * image->x_size + x];
-
-			if (red_value > image->max_red)
-				image->max_red = red_value;
-			if (green_value > image->max_green)
-				image->max_green = green_value;
-			if (blue_value > image->max_blue)
-				image->max_blue = blue_value;
-			if (red_value > image->max_red)
-				image->max_red = red_value;
-			if (image->max_red > image->max_overall)
-				image->max_overall = image->max_red;
-			if (image->max_green > image->max_overall)
-				image->max_overall = image->max_green;
-			if (image->max_blue > image->max_overall)
-				image->max_overall = image->max_blue;
-			x++;
-		}
-		y++;
-	}
+	while (l < image->buffer_size)
+		ft_image_convert_color(image, l++, endian);
 }

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:02:21 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/29 18:49:44 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/30 17:38:29 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define FT_PARAM_H
 
 # ifndef WIN_WIDTH
-# define WIN_WIDTH   1200
+# define WIN_WIDTH   700
 # endif
 
 # ifndef WIN_HEIGHT
-# define WIN_HEIGHT  1200
+# define WIN_HEIGHT  700
 # endif
 
 # define SCENE_X		0
@@ -65,7 +65,7 @@ typedef struct s_param
 
 	t_keyboard	*keyboard;
 	t_mouse		*mouse;
-	
+	int			fram;
 }	t_param;
 
 t_param	*ft_param_init(void);

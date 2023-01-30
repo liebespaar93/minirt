@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/29 15:50:53 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/30 23:15:15 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +39,13 @@ SRC_03_PARAM_DIR = $(ROOTDIR)/src_03_param
 SRC_04_RT_DIR = $(ROOTDIR)/src_04_rt
 SRC_05_SCENE_DIR = $(ROOTDIR)/src_05_scene
 SRC_06_DRAW_DIR = $(ROOTDIR)/src_06_draw
-SRC_07_QUATERNION_DIR = $(ROOTDIR)/src_07_quaternion
+SRC_07_INTERSECTION_DIR = $(ROOTDIR)/src_07_intersection
 
 
 SRC_TOOL_DIR = $(ROOTDIR)/src_tool
 SRC_VECTOR_DIR = $(ROOTDIR)/src_vector
 SRC_MATRIX_DIR = $(ROOTDIR)/src_matrix
+SRC_QUATERNION_DIR = $(ROOTDIR)/src_quaternion
 SRC_MLX_DIR = $(ROOTDIR)/src_mlx
 SRC_MLX_KEYBOARD_DIR = $(SRC_MLX_DIR)/src_mlx_keyboard
 SRC_MLX_MOUSE_DIR = $(SRC_MLX_DIR)/src_mlx_mouse
@@ -95,9 +96,9 @@ SRC_06_DRAW_SRC = ft_draw.c
 SRC_06_DRAW_C = $(addprefix $(SRC_06_DRAW_DIR)/, $(SRC_06_DRAW_SRC))
 
 
-SRC_07_QUATERNION_SRC =	ft_quaternion.c
-
-SRC_07_QUATERNION_C = $(addprefix $(SRC_07_QUATERNION_DIR)/, $(SRC_07_QUATERNION_SRC))
+SRC_07_INTERSECTION_SRC = ft_intersection.c
+					
+SRC_07_INTERSECTION_C = $(addprefix $(SRC_07_INTERSECTION_DIR)/, $(SRC_07_INTERSECTION_SRC))
 
 
 SRC_TOOL_SRC =					\
@@ -149,6 +150,11 @@ SRC_MATRIX_SRC =						\
 
 SRC_MATRIX_C = $(addprefix $(SRC_MATRIX_DIR)/, $(SRC_MATRIX_SRC))
 
+SRC_QUATERNION_SRC =	ft_quaternion.c
+
+SRC_QUATERNION_C = $(addprefix $(SRC_QUATERNION_DIR)/, $(SRC_QUATERNION_SRC))
+
+
 SRC_MLX_KEYBOARD_SRC =						\
 				ft_mac_key_hold.c			\
 				ft_mac_key_down.c			\
@@ -173,9 +179,10 @@ OBJS =	$(SRC_01_MAIN_C:$(SRC_01_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_04_RT_C:$(SRC_04_RT_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_05_SCENE_C:$(SRC_05_SCENE_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_06_DRAW_C:$(SRC_06_DRAW_DIR)/%.c=$(OBJ_DIR)/%.o)	\
-		$(SRC_07_QUATERNION_C:$(SRC_07_QUATERNION_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_07_INTERSECTION_C:$(SRC_07_INTERSECTION_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)				\
 		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)			\
+		$(SRC_QUATERNION_C:$(SRC_QUATERNION_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_MATRIX_C:$(SRC_MATRIX_DIR)/%.c=$(OBJ_DIR)/%.o)			\
 		$(SRC_MLX_KEYBOARD_C:$(SRC_MLX_KEYBOARD_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_MLX_MOUSE_C:$(SRC_MLX_MOUSE_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -217,7 +224,7 @@ $(OBJ_DIR)/%.o : $(SRC_05_SCENE_DIR)/%.c
 $(OBJ_DIR)/%.o : $(SRC_06_DRAW_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o : $(SRC_07_QUATERNION_DIR)/%.c
+$(OBJ_DIR)/%.o : $(SRC_07_INTERSECTION_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_TOOL_DIR)/%.c
@@ -226,6 +233,9 @@ $(OBJ_DIR)/%.o : $(SRC_TOOL_DIR)/%.c
 $(OBJ_DIR)/%.o : $(SRC_VECTOR_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
+$(OBJ_DIR)/%.o : $(SRC_QUATERNION_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+	
 $(OBJ_DIR)/%.o : $(SRC_MATRIX_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 

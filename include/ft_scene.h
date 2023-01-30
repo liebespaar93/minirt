@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:50:06 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 18:36:30 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/30 22:29:57 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@
 # include "ft_scene_camera.h"
 # include "ft_scene_light.h"
 # include "ft_scene_obj.h"
+# include "ft_quaternion.h"
 
 typedef struct s_scene
 {
 	/* data */
 	int		w;
 	int		h;
-	t_vec3	*pixel_axis;
+	int		pixel_size;
+	
+	t_quaternion	*pixel_q;
 
 	t_scn_image			*image;
 	

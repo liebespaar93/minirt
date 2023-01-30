@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:52:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/29 18:43:36 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/30 22:30:14 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_scene	*ft_scene_init(t_rt *rt, int x_size, int y_size)
 		ft_exit_print_error(ENOMEM, "ft_scene_init()");
 	scene->w = x_size;
 	scene->h = y_size;
-	if (!ft_zeromalloc((void **)&scene->pixel_axis, sizeof(t_vec3) * (scene->w  * scene->h)))
+	scene->pixel_size = x_size * y_size;
+	if (!ft_zeromalloc((void **)&scene->pixel_q, sizeof(t_quaternion) * (scene->pixel_size)))
 		ft_exit_print_error(ENOMEM, "ft_scene_init()");
 	scene->image = ft_image_init(x_size, y_size);
 	scene->camera_list = ft_scn_camera_set(rt);
@@ -48,8 +49,8 @@ void	ft_scene_free(t_scene **scene_ptr)
 		ft_scn_light_free(&scene->light_list);
 	if (scene->obj_list)
 		ft_scn_obj_free(&scene->obj_list);
-	if (scene->pixel_axis)
-		free(scene->pixel_axis);
+	if (scene->pixel_q)
+		free(scene->pixel_q);
 	free(*scene_ptr);
 	*scene_ptr = NULL;
 }
