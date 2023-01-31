@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/01/30 23:15:15 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/01/30 23:21:33 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_02_FD_DIR = $(ROOTDIR)/src_02_fd
 SRC_03_PARAM_DIR = $(ROOTDIR)/src_03_param
 SRC_04_RT_DIR = $(ROOTDIR)/src_04_rt
 SRC_05_SCENE_DIR = $(ROOTDIR)/src_05_scene
-SRC_06_DRAW_DIR = $(ROOTDIR)/src_06_draw
+SRC_06_RENDER_DIR = $(ROOTDIR)/src_06_render
 SRC_07_INTERSECTION_DIR = $(ROOTDIR)/src_07_intersection
 
 
@@ -91,9 +91,9 @@ SRC_05_SCENE_SRC =	ft_scene_camera.c	\
 SRC_05_SCENE_C = $(addprefix $(SRC_05_SCENE_DIR)/, $(SRC_05_SCENE_SRC))
 
 
-SRC_06_DRAW_SRC = ft_draw.c
+SRC_06_RENDER_SRC = ft_render.c
 					
-SRC_06_DRAW_C = $(addprefix $(SRC_06_DRAW_DIR)/, $(SRC_06_DRAW_SRC))
+SRC_06_RENDER_C = $(addprefix $(SRC_06_RENDER_DIR)/, $(SRC_06_RENDER_SRC))
 
 
 SRC_07_INTERSECTION_SRC = ft_intersection.c
@@ -178,7 +178,7 @@ OBJS =	$(SRC_01_MAIN_C:$(SRC_01_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_03_PARAM_C:$(SRC_03_PARAM_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_04_RT_C:$(SRC_04_RT_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_05_SCENE_C:$(SRC_05_SCENE_DIR)/%.c=$(OBJ_DIR)/%.o)	\
-		$(SRC_06_DRAW_C:$(SRC_06_DRAW_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_06_RENDER_C:$(SRC_06_RENDER_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_07_INTERSECTION_C:$(SRC_07_INTERSECTION_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)				\
 		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)			\
@@ -221,7 +221,7 @@ $(OBJ_DIR)/%.o : $(SRC_04_RT_DIR)/%.c
 $(OBJ_DIR)/%.o : $(SRC_05_SCENE_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o : $(SRC_06_DRAW_DIR)/%.c
+$(OBJ_DIR)/%.o : $(SRC_06_RENDER_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_07_INTERSECTION_DIR)/%.c

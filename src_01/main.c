@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/30 17:08:56 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/31 03:08:19 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #include "ft_param.h"
 
-#include "ft_draw.h"
+#include "ft_render.h"
 
 #include "ft_minirt_tool.h"
 
@@ -103,15 +103,13 @@ void	ft_mlx_key_mouse_set(t_param *param)
 
 int	ft_loop_event(t_param *param)
 {
-	//t_C	*camera;
-	//camera = param->scene->camera_list->camera;
 	if (ft_key_update(param->scene, param->keyboard) || \
 		ft_mouse_update(param->scene, param->mouse))
 	{
 		printf("%d\n", param->fram++);
 		//printf("%.2f %.2f %.2f , %.2f %.2f %.2f \n", camera->axis.x, camera->axis.y, camera->axis.z, camera->coord.x, camera->coord.y, camera->coord.z);
-		//ft_memset(param->scene->image->back_buffer, 0, param->renderer->size_line * SCENE_HEIGHT);
-		ft_draw_ply(param);
+		//ft_memset(param->scene., 0, param->renderer->size_line * SCENE_HEIGHT);
+		ft_render(param);
 		ft_memcpy(param->renderer->buffer, param->scene->image->back_buffer, param->renderer->size_line * SCENE_HEIGHT);
 		mlx_put_image_to_window(param->mlx->mlx_ptr, param->mlx->win_ptr, param->mlx->img_ptr, SCENE_X, SCENE_Y);
 	}
@@ -148,7 +146,7 @@ int main(int argc, char const *argv[])
 	param->fram = 0;
 	mlx_loop_hook(param->mlx->mlx_ptr, ft_loop_event, param);
 	mlx_loop(param->mlx->mlx_ptr);
-	// ft_param_free(&param);
+	//ft_param_free(&param);
 	system("leaks minirt");
 	return (0);
 }

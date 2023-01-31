@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw.c                                          :+:      :+:    :+:   */
+/*   ft_render.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:25:40 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/30 23:16:27 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/30 23:28:27 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdbool.h>
 
 #include "ft_param.h"
-#include "ft_draw.h"
+#include "ft_render.h"
 #include "ft_quaternion.h"
 #include "ft_intersection.h"
 
@@ -59,31 +59,13 @@ void	ft_pixel_set_axis(t_scene *scene)
 	}
 }
 
-void	ft_pixel_to_image(t_scene *scene)
+void	ft_render(t_param *param)
 {
-	int l;
-	t_vec3	ray_point;
-	t_vec3	v3_target;
-	t_intersection	intersection;
-
-	l = 0;
-	v3_target = ft_vector_3(0.0,0.0,1.0);
-	while (l < scene->pixel_size)
-	{
-		ft_memset(&intersection, 0, sizeof(t_intersection));
-		ray_point = ft_quaternion_rotate_vec3(scene->pixel_q[l], v3_target);
-		if (ft_obj_intersection(scene, &ray_point, &intersection))
-			ft_image_set_pixel(scene->image, l, &intersection.color);
-		else
-			ft_image_unset_pixel(scene->image, l);
-		l++;
-	}
-}
-
-void	ft_draw_ply(t_param *param)
-{
-	//최적화
+	//최적화 픽셀 방향 세팅 움직임이 없을시 스킵 나중에 변경
 	ft_pixel_set_axis(param->scene);
-	ft_pixel_to_image(param->scene);
+	
+	//픽셀의 쿼터니언 을 이용해서 충돌을 구함
+	ft_intersection(param->scene);
+
 	ft_image_display(param->scene->image, param->renderer->endian);
 }
