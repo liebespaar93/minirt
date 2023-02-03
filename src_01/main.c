@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/31 03:08:19 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/02 16:37:33 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,14 @@ void	ft_mlx_key_mouse_set(t_param *param)
 
 int	ft_loop_event(t_param *param)
 {
+	t_C	*camera;
+	
+	camera = param->scene->camera_list->camera;
 	if (ft_key_update(param->scene, param->keyboard) || \
 		ft_mouse_update(param->scene, param->mouse))
 	{
 		printf("%d\n", param->fram++);
-		//printf("%.2f %.2f %.2f , %.2f %.2f %.2f \n", camera->axis.x, camera->axis.y, camera->axis.z, camera->coord.x, camera->coord.y, camera->coord.z);
+		printf("%.2f %.2f %.2f , %.2f %.2f %.2f \n", camera->axis.x, camera->axis.y, camera->axis.z, camera->coord.x, camera->coord.y, camera->coord.z);
 		//ft_memset(param->scene., 0, param->renderer->size_line * SCENE_HEIGHT);
 		ft_render(param);
 		ft_memcpy(param->renderer->buffer, param->scene->image->back_buffer, param->renderer->size_line * SCENE_HEIGHT);
@@ -143,9 +146,12 @@ int main(int argc, char const *argv[])
 	ft_loop_event(param);
 	ft_mlx_key_mouse_set(param);
 
+
+	// ft_render(param);
 	param->fram = 0;
 	mlx_loop_hook(param->mlx->mlx_ptr, ft_loop_event, param);
 	mlx_loop(param->mlx->mlx_ptr);
+	
 	//ft_param_free(&param);
 	system("leaks minirt");
 	return (0);

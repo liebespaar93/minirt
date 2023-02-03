@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:25:40 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/30 23:28:27 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/02 17:43:25 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,18 @@ void	ft_pixel_set_axis(t_scene *scene)
 		angle = camera->fov / 360.0 / scene->h * M_PI;
 	
 	q = ft_quaternion_from_euler_angles(camera->axis);
-
-
 	l=0;
 	y_h = scene->h * 0.5;
 	x_h = scene->w * 0.5;
 	y = -y_h;
-	while (y < y_h)
+	while (y <= y_h)
 	{
 		x = -x_h;
-		while (x < y_h)
+		while (x <= x_h)
 		{
 			q_trans = ft_quaternion_multiply(q, ft_quaternion_rotation_y(x * angle));
 			q_trans = ft_quaternion_multiply(q_trans, ft_quaternion_rotation_x(y * angle));
-			scene->pixel_q[l++] = q_trans;
+			scene->pixel_q[l++] =  ft_quaternion_normalize(q_trans);
 			x++;
 		}
 		y++;
