@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/02 16:37:33 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/03 18:25:15 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,27 @@ int	ft_key_update(t_scene *scene, t_keyboard *keyboard)
 	t_C		*camera;
 
 	t_vec3	v3_target;
-	t_quaternion	q;
 
 	t_vec3	v3_move;
+	t_quaternion r_z;
 	
 	v3_target = ft_vector_3(0.0,0.0,1.0);
 
 	camera = scene->camera_list->camera;
 	if (!keyboard->x && !keyboard->y && \
-		!keyboard->contour_line && !keyboard->zoom)
+		!keyboard->contour_line && !keyboard->zoom && !keyboard->z)
 		return (0);
 	
-	q = ft_quaternion_from_euler_angles(camera->axis);
-	
-	v3_move = ft_quaternion_rotate_vec3(q, v3_target);
+	v3_move = ft_quaternion_rotate_vec3(camera->q_axis, v3_target);
 	v3_move = ft_vec3_mult(v3_move, keyboard->y);
 	camera->coord = ft_vec3_sub(camera->coord, v3_move);
 	keyboard->y = 0;
+	if (keyboard->z)
+	{
+		r_z = ft_quaternion_rotation_z(keyboard->z * 0.01);
+		camera->q_axis = ft_quaternion_multiply(camera->q_axis, r_z);
+		keyboard->z = 0;
+	}
 	return (1);
 }
 
@@ -60,24 +64,19 @@ int	ft_mouse_update(t_scene *scene, t_mouse *mouse)
 {
 	t_C		*camera;
 
-	t_quaternion	q;
 	t_quaternion	r_x;
 	t_quaternion	r_y;
-	t_quaternion	out_1;
-	t_quaternion	out_2;
 
 	camera = scene->camera_list->camera;
 	if (!mouse->x_angle && !mouse->y_angle)
 		return (0);
 
-	q = ft_quaternion_from_euler_angles(camera->axis);
 
 	r_x = ft_quaternion_rotation_y(mouse->x_angle * 0.01);
 	r_y = ft_quaternion_rotation_x(mouse->y_angle * 0.01);
 
-	out_1 = ft_quaternion_multiply(q, r_x);
-	out_2 = ft_quaternion_multiply(out_1, r_y);
-	camera->axis = ft_quaternion_to_euler_angles(out_2);
+	camera->q_axis = ft_quaternion_multiply(camera->q_axis, r_x);
+	camera->q_axis = ft_quaternion_multiply(camera->q_axis, r_y);
 	mouse->x_angle = 0;
 	mouse->y_angle = 0;
 	return (1);
@@ -143,9 +142,14 @@ int main(int argc, char const *argv[])
 	}
 
 	param->scene = ft_scene_init(param->rt, SCENE_WIDTH, SCENE_HEIGHT);
+
+
+	ft_render(param);
+	
 	ft_loop_event(param);
 	ft_mlx_key_mouse_set(param);
 
+	
 
 	// ft_render(param);
 	param->fram = 0;

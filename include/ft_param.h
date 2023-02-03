@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:02:21 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/02 16:37:30 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:35:34 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define FT_PARAM_H
 
 # ifndef WIN_WIDTH
-# define WIN_WIDTH   601
+# define WIN_WIDTH   600
 # endif
 
 # ifndef WIN_HEIGHT
-# define WIN_HEIGHT  601
+# define WIN_HEIGHT  WIN_WIDTH / 2
 # endif
 
 # define SCENE_X		0

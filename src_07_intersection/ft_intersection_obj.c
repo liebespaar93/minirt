@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:04 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/03 09:18:19 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/03 17:27:24 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "ft_intersection.h"
 
 #include <stdio.h>
+
+//http://matrix.skku.ac.kr/M-calculus/W2/
 
 //http://www.songho.ca/math/line/line.html
 bool	ft_obj_plane_intersection(t_pl *obj, t_C *camera, const t_vec3 *ray_point, t_intersection *intersection)
@@ -97,8 +99,8 @@ bool	ft_scn_obj_intersection(t_rt *obj, t_C *camera, const t_vec3 *ray_point, t_
 	result = false;
 	if (!ft_strcmp(obj->type, "sp"))
 		result = ft_obj_sphere_intersection((t_sp *)obj, camera, ray_point, intersection);
-	// else if (!ft_strcmp(obj->type, "pl"))
-	// 	result = ft_obj_plane_intersection((t_pl *)obj, camera, ray_point, intersection);
+	else if (!ft_strcmp(obj->type, "pl"))
+		result = ft_obj_plane_intersection((t_pl *)obj, camera, ray_point, intersection);
 	// else if (!ft_strcmp(obj->type, "cy"))
 	// 	result = ft_obj_cylinder_intersection((t_cy *)obj, camera, ray_point, intersection);
 	

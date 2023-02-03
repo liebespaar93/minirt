@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:37:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/26 14:17:02 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:42:14 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,12 @@ t_vec3	ft_quaternion_to_euler_angles(t_quaternion q)
 	c.x = 1.0 - 2.0 * (q.x * q.x + q.y * q.y);
 	angles.x = atan2(s.x, c.x);
 	
-	s.y = 2.0 * (q.w * q.y - q.z * q.x);
-	if (fabs(s.y) >= 1)
-		angles.y = copysign(M_PI / 2.0, s.y);
-	else
-		angles.y = asin(s.y);
+	s.y = sqrt(1.0 + 2.0 * (q.w * q.y - q.x *q.z));
+	c.y = sqrt(1.0 - 2.0 * (q.w * q.y - q.x *q.z));
+	angles.y = 2.0 * atan2(s.y, c.y) - M_PI / 2;
 
-	s.z = 2 * (q.w * q.z + q.x * q.y);
-	c.z = 1 - 2 * (q.y * q.y + q.z * q.z);
+	s.z = 2.0 * (q.w * q.z + q.x * q.y);
+	c.z = 1.0 - 2.0 * (q.y * q.y + q.z * q.z);
 	angles.z = atan2(s.z, c.z);
 	
 	return (angles);
@@ -154,7 +152,8 @@ t_vec3	ft_quaternion_axis_to_angles(t_quaternion q, double *angle)
 
 	if (q.w > 1.0)
 		q = ft_quaternion_normalize(q);
-	*angle = 2.0 * acos(q.w);
+	if (angle)
+		*angle = 2.0 * acos(q.w);
 	divider = sqrt(1.0 - q.w * q.w);
 	if (divider < 0.001)
 	{

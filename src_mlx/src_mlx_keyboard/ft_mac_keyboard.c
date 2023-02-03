@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:23:44 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/29 14:48:38 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/03 18:18:12 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	ft_key_up(int keycode, t_keyboard *keyboard)
 		return (1);
 	return (0);
 }
+#include <stdio.h>
+
 
 int	ft_key_down(int keycode, t_keyboard *keyboard)
 {
@@ -45,6 +47,8 @@ int	ft_key_down(int keycode, t_keyboard *keyboard)
 	if (ft_keydown_move(keycode, keyboard))
 		return (1);
 	if (ft_keydown_option(keycode, keyboard))
+		return (1);
+	if (ft_keydown_z_rotation(keycode, keyboard))
 		return (1);
 	return (0);
 }

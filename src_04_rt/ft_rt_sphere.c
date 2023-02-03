@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:50:23 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 13:48:49 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/03 09:24:44 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void	ft_rt_sphere(t_rt *rt, char *str)
 	rt_sp->diameter = ft_atof(temp[2]);
 	rt_sp->color.integer = ft_rt_color(temp[3]);
 	ft_split_free(temp);
+
+	// 추가항목
+	rt_sp->axis = ft_vector_3(0.0, 0.0, 1.0);
+
 	ft_rt_addback(rt, rt_sp->type, (void *)rt_sp);
 }
 

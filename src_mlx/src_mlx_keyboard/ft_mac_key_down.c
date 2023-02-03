@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:24:24 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/29 14:49:05 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/03 18:21:57 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,23 @@ int	ft_keydown_option(int keycode, t_keyboard *keyboard)
 	}
 	else if (keycode == KEY_ESC && ++f)
 		exit(1);
+	return (f);
+}
+
+int	ft_keydown_z_rotation(int keycode, t_keyboard *keyboard)
+{
+	int	f;
+
+	f = 0;
+	if (keycode == KEY_Q)
+	{
+		keyboard->z = -1;
+		f++;
+	}
+	else if (keycode == KEY_E)
+	{
+		keyboard->z = 1;
+		f++;
+	}
 	return (f);
 }

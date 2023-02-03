@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:31:13 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 13:49:20 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/03 18:00:09 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "ft_get_next_line.h"
 # include "ft_vector.h"
+# include "ft_quaternion.h"
 
 typedef struct s_rt
 {
@@ -34,6 +35,7 @@ typedef struct s_C
 	char	*type;
 	t_vec3	coord;
 	t_vec3	axis;
+	t_quaternion q_axis;
 	double	fov;
 }	t_C;
 
@@ -51,6 +53,10 @@ typedef struct s_sp
 	t_vec3	coord;
 	double	diameter;
 	t_color	color;
+
+
+	t_vec3	axis;
+	
 }	t_sp;
 
 typedef struct s_pl

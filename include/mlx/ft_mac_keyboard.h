@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:24:52 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/29 14:47:34 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/03 18:18:35 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_keyboard
 {	
 	int	x;
 	int	y;
+	int z;
 
 	int	zoom;
 	int	shift;
@@ -38,6 +39,7 @@ int		ft_key_down(int keycode, t_keyboard *keyboard);
 int		ft_keydown_plus_min(int keycode, t_keyboard *keyboard);
 int		ft_keydown_move(int keycode, t_keyboard *keyboard);
 int		ft_keydown_option(int keycode, t_keyboard *keyboard);
+int		ft_keydown_z_rotation(int keycode, t_keyboard *keyboard);
 
 /* ft_mac_key_up.c */
 int		ft_keyup_plus_min(int keycode, t_keyboard *keyboard);
