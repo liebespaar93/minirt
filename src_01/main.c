@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/03 18:25:15 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/04 16:34:23 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,15 @@ int	ft_key_update(t_scene *scene, t_keyboard *keyboard)
 	v3_move = ft_vec3_mult(v3_move, keyboard->y);
 	camera->coord = ft_vec3_sub(camera->coord, v3_move);
 	keyboard->y = 0;
+
+	v3_move = ft_quaternion_rotate_vec3(camera->q_axis, ft_vector_3(-1.0,0.0,0.0));
+	v3_move = ft_vec3_mult(v3_move, keyboard->x);
+	camera->coord = ft_vec3_sub(camera->coord, v3_move);
+	keyboard->x = 0;
+
 	if (keyboard->z)
 	{
-		r_z = ft_quaternion_rotation_z(keyboard->z * 0.01);
+		r_z = ft_quaternion_rotation_z(-keyboard->z * 0.1);
 		camera->q_axis = ft_quaternion_multiply(camera->q_axis, r_z);
 		keyboard->z = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:04 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/03 17:27:24 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/04 17:10:41 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ bool	ft_obj_plane_intersection(t_pl *obj, t_C *camera, const t_vec3 *ray_point, 
 		intersection->dist = t;
 		intersection->type = obj->type;
 		intersection->obj = (t_rt *)obj;
-		intersection->color = ft_vector_3(obj->color.bit.r / 255, obj->color.bit.g / 255, obj->color.bit.b/ 255);
+		//intersection->color = ft_vector_3(obj->color.bit.r / 255, obj->color.bit.g / 255, obj->color.bit.b/ 255);
+		intersection->color = ft_vector_3(1.0,1.0,1.0);
 		intersection->hit_point = ft_vec3_add(camera->coord, ft_vec3_mult(*ray_point, t));
 		// intersection->out_point = 
 		// 	ft_vec3_add(*ray_point,
@@ -45,6 +46,26 @@ bool	ft_obj_plane_intersection(t_pl *obj, t_C *camera, const t_vec3 *ray_point, 
 }
 
 //https://m.blog.naver.com/hermet/68084286
+// bool	ft_obj_sphere_intersection(t_sp *obj, t_C *camera, const t_vec3 *ray_point, t_intersection *intersection)
+// {
+// 	double a = ft_vec3_dot(*ray_point, *ray_point);
+// 	double b = 2.0 * ft_vec3_dot(camera->coord, *ray_point);
+// 	double c = ft_vec3_dot(camera->coord, camera->coord) - pow(obj->diameter/2,2.0);
+
+// 	double dis = b * b - 4.0 * a * c;
+// 	//double t0 = (-b + sqrt(dis) / (2.0 * a));
+// 	double t2 = (-b - sqrt(dis) / (2.0 * a));
+
+// 	if (dis >= 0.0)
+// 	{
+// 		intersection->hit_point = ft_vec3_add(camera->coord, ft_vec3_mult(*ray_point, t2));
+// 		intersection->color = ft_vec3_normalize(intersection->hit_point);
+// 		return (true);
+// 	}
+
+
+// 	return (false);
+// }
 bool	ft_obj_sphere_intersection(t_sp *obj, t_C *camera, const t_vec3 *ray_point, t_intersection *intersection)
 {
 	t_vec3	cam_to_obj_v3 = ft_vec3_sub(obj->coord, camera->coord); // 원과의 방향
@@ -70,22 +91,17 @@ bool	ft_obj_sphere_intersection(t_sp *obj, t_C *camera, const t_vec3 *ray_point,
 	if (a > 0.0 && b > 0.0)
 	{
 		//원 밖에 서 2점을 만날때
-		if (a < b)
-			intersection->dist = a;
-		else
-			intersection->dist = b;
+		intersection->dist = a;
 		intersection->type = obj->type;
 		intersection->obj = (t_rt *)obj;
-		intersection->color = ft_vector_3(obj->color.bit.r / 255, obj->color.bit.g / 255, obj->color.bit.b/ 255);
+		//intersection->color = ft_vector_3(obj->color.bit.r / 255, obj->color.bit.g / 255, obj->color.bit.b/ 255);
 		intersection->hit_point = ft_vec3_add(camera->coord, ft_vec3_mult(*ray_point, intersection->dist));
 		intersection->hit_axis = ft_vec3_sub(intersection->hit_point, obj->coord);
+		intersection->color = ft_vec3_normalize(intersection->hit_point);
 		return (true);
 	}
-
-
 	return (false);
 }
-
 
 // bool	ft_obj_cylinder_intersection(t_pl *obj, t_C *camera, const t_vec3 *ray_point, t_intersection *intersection)
 // {
