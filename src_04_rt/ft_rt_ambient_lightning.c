@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 11:06:20 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 16:28:49 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 04:31:12 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_rt_ambient_lightning(t_rt *rt, char *str)
 		ft_exit_print_error(EBADF, "ft_rt_ambient_lightning()");
 	rt_A->type = ft_strdup(temp[0]);
 	rt_A->ratio = ft_atof(temp[1]);
-	rt_A->color.integer = ft_rt_color(temp[2]);
+	rt_A->color = ft_rt_color(temp[2]);
 	ft_split_free(temp);
 	ft_rt_addback(rt, rt_A->type, (void *)rt_A);
 }

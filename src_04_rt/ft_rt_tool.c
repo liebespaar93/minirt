@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 13:42:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 12:49:44 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 04:39:55 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,19 @@ int	ft_color_check(int color)
 	return (color);	
 }
 
-int	ft_rt_color(char *str)
+t_vec3	ft_rt_color(char *str)
 {
 	char	**temp;
-	t_color	color;
+	t_vec3	color;
 
 	temp = ft_split(str, ',');
 	if (ft_ptrlen((void **)&temp, "char **") != 3)
 		ft_exit_print_error(EBADF, "ft_rt_color()");
-	color.integer = 0;
-	color.bit.r = ft_color_check(ft_atoi(temp[0]));
-	color.bit.g = ft_color_check(ft_atoi(temp[1]));
-	color.bit.b = ft_color_check(ft_atoi(temp[2]));
+	color.x = ft_color_check(ft_atoi(temp[0])) / 255.0;
+	color.y = ft_color_check(ft_atoi(temp[1])) / 255.0;
+	color.z = ft_color_check(ft_atoi(temp[2])) / 255.0;
 	ft_split_free(temp);
-	return (color.integer);
+	return (color);
 }
 
 t_vec3	ft_rt_vec3(char *str)
@@ -60,12 +59,12 @@ t_vec3	ft_rt_vec3(char *str)
 void	ft_rt_printf(t_rt rt)
 {
 	if (!ft_strcmp(rt.type, "A"))
-		printf("%s \t%f %d %d %d\n", 
+		printf("%s \t%f %f %f %f\n", 
 			((t_A *)rt.data)->type, 
 			((t_A *)rt.data)->ratio, 
-			((t_A *)rt.data)->color.bit.r, 
-			((t_A *)rt.data)->color.bit.g, 
-			((t_A *)rt.data)->color.bit.b);
+			((t_A *)rt.data)->color.x, 
+			((t_A *)rt.data)->color.y, 
+			((t_A *)rt.data)->color.z);
 	else if (!ft_strcmp(rt.type, "C"))
 		printf("%s \t%f %f %f %f %f %f %f\n", 
 			((t_C *)rt.data)->type, 
@@ -77,27 +76,27 @@ void	ft_rt_printf(t_rt rt)
 			((t_C *)rt.data)->axis.z,
 			((t_C *)rt.data)->fov);
 	else if (!ft_strcmp(rt.type, "L"))
-		printf("%s \t%f %f %f %f %d %d %d\n", 
+		printf("%s \t%f %f %f %f %f %f %f\n", 
 			((t_L *)rt.data)->type, 
 			((t_L *)rt.data)->coord.x, 
 			((t_L *)rt.data)->coord.y, 
 			((t_L *)rt.data)->coord.z, 
 			((t_L *)rt.data)->ratio,
-			((t_L *)rt.data)->color.bit.r, 
-			((t_L *)rt.data)->color.bit.g, 
-			((t_L *)rt.data)->color.bit.b);
+			((t_L *)rt.data)->color.x, 
+			((t_L *)rt.data)->color.y, 
+			((t_L *)rt.data)->color.z);
 	else if (!ft_strcmp(rt.type, "sp"))
-		printf("%s \t%f %f %f %f %d %d %d\n", 
+		printf("%s \t%f %f %f %f %f %f %f\n", 
 			((t_sp *)rt.data)->type, 
 			((t_sp *)rt.data)->coord.x, 
 			((t_sp *)rt.data)->coord.y, 
 			((t_sp *)rt.data)->coord.z, 
 			((t_sp *)rt.data)->diameter,
-			((t_sp *)rt.data)->color.bit.r, 
-			((t_sp *)rt.data)->color.bit.g, 
-			((t_sp *)rt.data)->color.bit.b);
+			((t_sp *)rt.data)->color.x, 
+			((t_sp *)rt.data)->color.y, 
+			((t_sp *)rt.data)->color.z);
 	else if (!ft_strcmp(rt.type, "pl"))
-		printf("%s \t%f %f %f %f %f %f %d %d %d\n", 
+		printf("%s \t%f %f %f %f %f %f %f %f %f\n", 
 			((t_pl *)rt.data)->type, 
 			((t_pl *)rt.data)->coord.x, 
 			((t_pl *)rt.data)->coord.y, 
@@ -105,11 +104,11 @@ void	ft_rt_printf(t_rt rt)
 			((t_pl *)rt.data)->axis.x, 
 			((t_pl *)rt.data)->axis.y, 
 			((t_pl *)rt.data)->axis.z,
-			((t_pl *)rt.data)->color.bit.r, 
-			((t_pl *)rt.data)->color.bit.g, 
-			((t_pl *)rt.data)->color.bit.b);
+			((t_pl *)rt.data)->color.x, 
+			((t_pl *)rt.data)->color.y, 
+			((t_pl *)rt.data)->color.z);
 	else if (!ft_strcmp(rt.type, "cy"))
-		printf("%s \t%f %f %f %f %f %f %f %f %d %d %d\n", 
+		printf("%s \t%f %f %f %f %f %f %f %f %f %f %f\n", 
 			((t_cy *)rt.data)->type, 
 			((t_cy *)rt.data)->coord.x, 
 			((t_cy *)rt.data)->coord.y, 
@@ -119,9 +118,9 @@ void	ft_rt_printf(t_rt rt)
 			((t_cy *)rt.data)->axis.z,
 			((t_cy *)rt.data)->diameter,
 			((t_cy *)rt.data)->height,
-			((t_cy *)rt.data)->color.bit.r, 
-			((t_cy *)rt.data)->color.bit.g, 
-			((t_cy *)rt.data)->color.bit.b);
+			((t_cy *)rt.data)->color.x, 
+			((t_cy *)rt.data)->color.y, 
+			((t_cy *)rt.data)->color.z);
 	else
 		printf("error rt!!");
 	

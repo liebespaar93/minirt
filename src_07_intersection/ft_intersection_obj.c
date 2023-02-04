@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:21:04 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/04 19:30:54 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 05:58:34 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,16 @@
 
 //http://www.songho.ca/math/line/line.html
 bool	ft_obj_plane_intersection(t_pl *obj, t_C *camera, const t_vec3 *ray_point, t_intersection *intersection)
-{
-
-	double d = ft_vec3_dot(obj->axis, obj->coord);
+{	
+	double t;
 	
-	double test1 = ft_vec3_dot(camera->coord, obj->axis) + d;
-	double t = -1 * test1 / (ft_vec3_dot(obj->axis, *ray_point));
-
+	t = - 1.0 * (ft_vec3_dot(camera->coord, obj->axis) + ft_vec3_dot(obj->axis, obj->coord)) / (ft_vec3_dot(obj->axis, *ray_point));
 	if (t > 0.0)
 	{
 		intersection->dist = t;
 		intersection->type = obj->type;
 		intersection->obj = (t_rt *)obj;
-		intersection->color = ft_vector_3(obj->color.bit.r / 255.0, obj->color.bit.g / 255.0, obj->color.bit.b/ 255.0);
-		//intersection->color = ft_vector_3(1.0,1.0,1.0);
+		intersection->color = obj->color;
 		intersection->hit_point = ft_vec3_add(camera->coord, ft_vec3_mult(*ray_point, t));
 		intersection->hit_axis = obj->axis;
 		return (true);
@@ -45,40 +41,32 @@ bool	ft_obj_plane_intersection(t_pl *obj, t_C *camera, const t_vec3 *ray_point, 
 //https://m.blog.naver.com/hermet/68084286
 bool	ft_obj_sphere_intersection(t_sp *obj, t_C *camera, const t_vec3 *ray_point, t_intersection *intersection)
 {
-	t_vec3	cam_to_obj_v3 = ft_vec3_sub(obj->coord, camera->coord); // 원과의 방향
-	double	cam_to_obj_dist = ft_vec3_dot(cam_to_obj_v3, cam_to_obj_v3); // 원가의 거리
-	double	cam_to_inner_dist = ft_vec3_dot(cam_to_obj_v3, *ray_point); // 내적 길이
-	t_vec3	inner_coord = ft_vec3_add(camera->coord, ft_vec3_mult(*ray_point, cam_to_inner_dist));
-	t_vec3	obj_to_inner_v3 = ft_vec3_sub(inner_coord, obj->coord); // 원과 내적의 방향
-	double	obj_to_inner_dist = ft_vec3_dot(obj_to_inner_v3, obj_to_inner_v3); // 원과 내적의 거리
-	double	r = obj->diameter / 2; // 반지름
-	double	q = sqrt(pow(obj_to_inner_dist, 2.0) + pow(r, 2.0));
+	t_vec3	cam_to_obj_v3;
+	double	cam_to_inner_dist;
+	t_vec3	obj_to_inner_v3;
+	double	obj_to_inner_dist;
+	double	q;
 
-	if (cam_to_inner_dist < 0)
+	cam_to_obj_v3 =  ft_vec3_sub(obj->coord, camera->coord); // 원과의 방향
+	cam_to_inner_dist = ft_vec3_dot(cam_to_obj_v3, *ray_point); // 내적 길이
+	if (cam_to_inner_dist < 0.0)
 		return (false);
-	if (fabs(obj_to_inner_dist) > r)
+	if (ft_vec3_dot(cam_to_obj_v3, cam_to_obj_v3) < obj->radius) //원 안에 있을때
 		return (false);
-	if (cam_to_obj_dist < r)
-	{
-		//원 안에 있을때 
+	obj_to_inner_v3 = ft_vec3_sub(ft_vec3_add(camera->coord, ft_vec3_mult(*ray_point, cam_to_inner_dist)), obj->coord); // 원과 내적의 방향
+	obj_to_inner_dist = ft_vec3_dot(obj_to_inner_v3, obj_to_inner_v3); // 원과 내적의 거리
+	q = sqrt(pow(obj_to_inner_dist, 2.0) + pow(obj->radius, 2.0));
+	if (fabs(obj_to_inner_dist) > obj->radius) // 내적이 원 밖임
 		return (false);
-	}
-	double a = cam_to_inner_dist - q;
-	double b = cam_to_inner_dist + q;
-	if (a > 0.0 && b > 0.0)
-	{
-		//원 밖에 서 2점을 만날때
-		intersection->dist = a;
-		intersection->type = obj->type;
-		intersection->obj = (t_rt *)obj;
-		intersection->color = ft_vector_3(obj->color.bit.r / 255, obj->color.bit.g / 255, obj->color.bit.b/ 255);
-		intersection->hit_point = ft_vec3_add(camera->coord, ft_vec3_mult(*ray_point, intersection->dist));
-		intersection->hit_axis = ft_vec3_normalize(ft_vec3_sub(intersection->hit_point, obj->coord));
-		// intersection->color = 
-		// 	ft_vec3_add(ft_vec3_mult(ft_vec3_normalize(intersection->hit_point), 0.5), ft_vector_3(0.5, 0.5, 0.5));
-		return (true);
-	}
-	return (false);
+	
+	//원 밖에 서 2점을 만날때
+	intersection->dist = cam_to_inner_dist - q;
+	intersection->type = obj->type;
+	intersection->obj = (t_rt *)obj;
+	intersection->color = obj->color;
+	intersection->hit_point = ft_vec3_add(camera->coord, ft_vec3_mult(*ray_point, intersection->dist));
+	intersection->hit_axis = ft_vec3_normalize(ft_vec3_sub(intersection->hit_point, obj->coord));
+	return (true);
 }
 
 // bool	ft_obj_cylinder_intersection(t_pl *obj, t_C *camera, const t_vec3 *ray_point, t_intersection *intersection)
@@ -88,17 +76,14 @@ bool	ft_obj_sphere_intersection(t_sp *obj, t_C *camera, const t_vec3 *ray_point,
 
 bool	ft_scn_obj_intersection(t_rt *obj, t_C *camera, const t_vec3 *ray_point, t_intersection *intersection)
 {
-	bool	result;
-
-	result = false;
 	if (!ft_strcmp(obj->type, "sp"))
-		result = ft_obj_sphere_intersection((t_sp *)obj, camera, ray_point, intersection);
+		return (ft_obj_sphere_intersection((t_sp *)obj, camera, ray_point, intersection));
 	else if (!ft_strcmp(obj->type, "pl"))
-		result = ft_obj_plane_intersection((t_pl *)obj, camera, ray_point, intersection);
+		return (ft_obj_plane_intersection((t_pl *)obj, camera, ray_point, intersection));
 	// else if (!ft_strcmp(obj->type, "cy"))
 	// 	result = ft_obj_cylinder_intersection((t_cy *)obj, camera, ray_point, intersection);
 	
-	return (result);
+	return (false);
 }
 
 bool	ft_obj_intersection(t_scene *scene, const t_vec3 *ray_point, t_intersection *result_intersection)
@@ -108,13 +93,12 @@ bool	ft_obj_intersection(t_scene *scene, const t_vec3 *ray_point, t_intersection
 	int i;
 	double	min_dist;
 
-
 	intersection_found = false;
-	min_dist = 10000;
+	min_dist = 10000.0;
 	i = 0;
 	while (i < scene->obj_list->max_index)
 	{
-		ft_memset(&intersection, 0, sizeof(t_intersection));
+		// ft_memset(&intersection, 0, sizeof(t_intersection)); 최적화
 		if (ft_scn_obj_intersection(scene->obj_list->rt[i], scene->camera_list->camera, ray_point, &intersection))
 		{
 			if (intersection.dist < min_dist)

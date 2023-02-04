@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:31:13 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/03 18:00:09 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 04:57:34 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_A
 {
 	char	*type;
 	double	ratio;
-	t_color	color;
+	t_vec3	color;
 }	t_A;
 
 typedef struct s_C
@@ -44,7 +44,7 @@ typedef struct s_L
 	char	*type;
 	t_vec3	coord;
 	double	ratio;
-	t_color	color;
+	t_vec3	color;
 }	t_L;
 
 typedef struct s_sp
@@ -52,11 +52,11 @@ typedef struct s_sp
 	char	*type;
 	t_vec3	coord;
 	double	diameter;
-	t_color	color;
+	t_vec3	color;
 
 
 	t_vec3	axis;
-	
+	double	radius;
 }	t_sp;
 
 typedef struct s_pl
@@ -64,7 +64,7 @@ typedef struct s_pl
 	char	*type;
 	t_vec3	coord;
 	t_vec3	axis;
-	t_color	color;
+	t_vec3	color;
 }	t_pl;
 
 typedef struct s_cy
@@ -74,7 +74,7 @@ typedef struct s_cy
 	t_vec3	axis;
 	double	diameter;
 	double	height;
-	t_color	color;
+	t_vec3	color;
 }	t_cy;
 
 
@@ -83,7 +83,7 @@ void	ft_rt_free(t_rt **rt_ptr);
 
 void ft_rt_addback(t_rt *rt, char *type, void *data);
 
-int	ft_rt_color(char *str);
+t_vec3	ft_rt_color(char *str);
 t_vec3	ft_rt_vec3(char *str);
 
 

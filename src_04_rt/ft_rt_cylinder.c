@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:53:48 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 13:44:31 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 04:31:22 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_rt_cylinder(t_rt *rt, char *str)
 	rt_cy->axis = ft_rt_vec3(temp[2]);
 	rt_cy->diameter = ft_atof(temp[3]);
 	rt_cy->height = ft_atof(temp[4]);
-	rt_cy->color.integer = ft_rt_color(temp[5]);
+	rt_cy->color = ft_rt_color(temp[5]);
 	ft_split_free(temp);
 	ft_rt_addback(rt, rt_cy->type, (void *)rt_cy);
 }

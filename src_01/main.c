@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/04 16:34:23 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 05:34:20 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,20 +106,23 @@ void	ft_mlx_key_mouse_set(t_param *param)
 	mlx_hook(param->mlx->win_ptr, 17, 0, ft_window, param->mouse);
 }
 
+#include <sys/time.h>
 int	ft_loop_event(t_param *param)
 {
 	t_C	*camera;
 	
+	struct timeval stop, start;
+	gettimeofday(&start, NULL);
 	camera = param->scene->camera_list->camera;
 	if (ft_key_update(param->scene, param->keyboard) || \
 		ft_mouse_update(param->scene, param->mouse))
 	{
-		printf("%d\n", param->fram++);
-		printf("%.2f %.2f %.2f , %.2f %.2f %.2f \n", camera->axis.x, camera->axis.y, camera->axis.z, camera->coord.x, camera->coord.y, camera->coord.z);
-		//ft_memset(param->scene., 0, param->renderer->size_line * SCENE_HEIGHT);
 		ft_render(param);
 		ft_memcpy(param->renderer->buffer, param->scene->image->back_buffer, param->renderer->size_line * SCENE_HEIGHT);
 		mlx_put_image_to_window(param->mlx->mlx_ptr, param->mlx->win_ptr, param->mlx->img_ptr, SCENE_X, SCENE_Y);
+		gettimeofday(&stop, NULL);
+		printf("%d time : %ld\n", param->fram++, (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec);
+		printf("%.2f %.2f %.2f , %.2f %.2f %.2f \n", camera->axis.x, camera->axis.y, camera->axis.z, camera->coord.x, camera->coord.y, camera->coord.z);
 	}
 	return (0);
 }

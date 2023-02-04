@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:06:55 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/04 18:58:57 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 06:01:00 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	ft_intersection(t_scene *scene)
 	t_intersection	intersection;
 
 	l = 0;
-	v3_target = ft_vector_3(0.0,0.0,1.0);
+	v3_target = ft_vector_3(0.0, 0.0, 1.0);
 	while (l < scene->pixel_size)
 	{
-		ft_memset(&intersection, 0, sizeof(t_intersection));
-		ray_point = ft_vec3_normalize(ft_quaternion_rotate_vec3(scene->pixel_q[l], v3_target));
+		// ft_memset(&intersection, 0, sizeof(t_intersection)); 최적화
+		ray_point = ft_quaternion_rotate_vec3(scene->pixel_q[l], v3_target);
 		if (ft_obj_intersection(scene, &ray_point, &intersection))
 		{
 			// 물체 표면에 따라 다음에 만들기

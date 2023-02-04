@@ -30,6 +30,7 @@
 		"ft_mac_mouse.h": "c",
 		"locale": "c",
 		"ft_intersection.h": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"sstream": "c"
 	}
 }

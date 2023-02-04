@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:51:47 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 13:48:03 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 04:31:30 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_rt_plane(t_rt *rt, char *str)
 	rt_pl->type = ft_strdup(temp[0]);
 	rt_pl->coord = ft_rt_vec3(temp[1]);
 	rt_pl->axis = ft_rt_vec3(temp[2]);
-	rt_pl->color.integer = ft_rt_color(temp[3]);
+	rt_pl->color = ft_rt_color(temp[3]);
 	ft_split_free(temp);
 	ft_rt_addback(rt, rt_pl->type, (void *)rt_pl);
 }
