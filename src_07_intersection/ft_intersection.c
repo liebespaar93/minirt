@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:06:55 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/04 17:00:44 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/04 18:58:57 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_intersection(t_scene *scene)
 			// }
 			//else
 			// {
-			// ft_light_intersection(scene, &ray_point, &intersection);
+			ft_light_intersection(scene, &ray_point, &intersection);
 			ft_image_set_pixel(scene->image, l, &intersection.color);
 
 
