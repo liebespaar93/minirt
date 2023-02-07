@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:12:12 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/04 14:26:36 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:10:58 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_intersection
 	/* data */
 	char	*type;
 	t_rt	*obj;
-	t_vec3	hit_point;
+	t_vec3	hit_coord;
 	t_vec3	hit_axis;
 	t_vec3	color;
 	double	dist;
@@ -29,7 +29,9 @@ typedef struct s_intersection
 
 
 void	ft_intersection(t_scene *scene);
-bool	ft_obj_intersection(t_scene *scene, const t_vec3 *ray_point, t_intersection *result_intersection);
+
+bool	ft_obj_intersection(t_scene *scene, t_vec3 *coord, const t_vec3 *ray_point, t_intersection *result_intersection);
+bool	ft_scn_obj_intersection(t_rt *obj, t_vec3 *coord, const t_vec3 *ray_point, t_intersection *intersection);
 
 bool	ft_light_intersection(t_scene *scene, const t_vec3 *ray_point, t_intersection *intersection);
 #endif

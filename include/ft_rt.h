@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:31:13 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/05 04:57:34 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 07:21:59 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ typedef struct s_cy
 	double	diameter;
 	double	height;
 	t_vec3	color;
+
+
+	double	radius;
 }	t_cy;
 
 

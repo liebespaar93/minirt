@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:50:23 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/05 04:58:00 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/06 17:24:48 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_rt_sphere(t_rt *rt, char *str)
 
 	// 추가항목
 	rt_sp->axis = ft_vector_3(0.0, 0.0, 1.0);
-	rt_sp->radius = rt_sp->diameter / 2;
+	rt_sp->radius = rt_sp->diameter / 2.0;
 
 	ft_rt_addback(rt, rt_sp->type, (void *)rt_sp);
 }

@@ -31,6 +31,8 @@
 		"locale": "c",
 		"ft_intersection.h": "c",
 		"__locale": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"atomic": "c",
+		"bitset": "c"
 	}
 }

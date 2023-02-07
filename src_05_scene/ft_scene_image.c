@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:41:30 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/04 18:39:06 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/06 17:32:39 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	ft_image_set_pixel(t_scn_image *image, const int l, const t_vec3 *color)
 
 void	ft_image_unset_pixel(t_scn_image *image, const int l)
 {
-	image->rchannel[l] = 1.0;
-	image->gchannel[l] = 1.0;
+	image->rchannel[l] = 0.2;
+	image->gchannel[l] = 0.2;
 	image->bchannel[l] = 1.0;
 }
 void	ft_image_convert_color(t_scn_image *image, int point, bool endian)

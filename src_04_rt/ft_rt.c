@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:06:43 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 16:33:14 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/06 23:18:55 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ size_t	ft_rt_len(t_read_file *ft_read_file)
 		else if (!ft_memcmp(read_line->data, "cy" , ft_strlen("cy")))
 			len++;
 		else if (*read_line->data == '\n')
+			;
+		else if (!ft_memcmp(read_line->data, "//" , ft_strlen("//")))
+			;
+		else if (!ft_memcmp(read_line->data, "#" , ft_strlen("#")))
 			;
 		else
 			ft_exit_print_error(EBADF, "ft_rt_len()");
@@ -76,7 +80,7 @@ void	ft_rt_check(t_rt *rt)
 	index = 0;
 	while (index < 2)
 	{
-		if (checker[index] != 1)
+		if (checker[index] < 1)
 			ft_exit_print_error(EBADF, "ft_rt_check()");
 		index++;
 	}

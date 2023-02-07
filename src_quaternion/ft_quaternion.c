@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:37:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/03 16:42:14 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/05 06:21:18 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_quaternion	ft_quaternion_set(double x, double y, double z, double w)
 
 t_quaternion	ft_quaternion_identity()
 {
-    return (ft_quaternion_set(0, 0, 0, 1));
+    return (ft_quaternion_set(0.0, 0.0, 0.0, 1.0));
 }
 
 t_quaternion	ft_quaternion_conjugate(t_quaternion q)
@@ -174,9 +174,9 @@ t_quaternion	ft_quaternion_rotation_x(double angle)
 {
 	t_vec3	axis;
 
-	axis.x = 1;
-	axis.y = 0;
-	axis.z = 0;
+	axis.x = 1.0;
+	axis.y = 0.0;
+	axis.z = 0.0;
 	return (ft_quaternion_axis_from_angle(axis, angle));
 }
 
@@ -184,9 +184,9 @@ t_quaternion	ft_quaternion_rotation_y(double angle)
 {
 	t_vec3	axis;
 
-	axis.x = 0;
-	axis.y = 1;
-	axis.z = 0;
+	axis.x = 0.0;
+	axis.y = 1.0;
+	axis.z = 0.0;
 	return (ft_quaternion_axis_from_angle(axis, angle));
 }
 
@@ -194,9 +194,9 @@ t_quaternion	ft_quaternion_rotation_z(double angle)
 {
 	t_vec3	axis;
 
-	axis.x = 0;
-	axis.y = 0;
-	axis.z = 1;
+	axis.x = 0.0;
+	axis.y = 0.0;
+	axis.z = 1.0;
 	return (ft_quaternion_axis_from_angle(axis, angle));	
 }
 
@@ -235,17 +235,17 @@ t_mtx3	ft_quaternion_rotate_matrix(t_quaternion q)
 
 	m3 = ft_matrix_3(
 		(double [3]){
-			1 - 2 * q.y * q.y - 2 * q.z * q.z, 
-			2 * q.x * q.y - 2 * q.z * q.w, 
-			2 * q.x * q.z + 2 * q.y * q.w},
+			1.0 - 2.0 * q.y * q.y - 2.0 * q.z * q.z, 
+			2.0 * q.x * q.y - 2.0 * q.z * q.w, 
+			2.0 * q.x * q.z + 2.0 * q.y * q.w},
 		(double [3]){
-			2 * q.x * q.y + 2 * q.z *q.w,
-			1 - 2 * q.x * q.x - 2 * q.z * q.z,
-			2 * q.y * q.z - 2 * q.x * q.w},
+			2.0 * q.x * q.y + 2.0 * q.z * q.w,
+			1.0 - 2.0 * q.x * q.x - 2.0 * q.z * q.z,
+			2.0 * q.y * q.z - 2.0 * q.x * q.w},
 		(double [3]){
-			2 * q.x * q.z - 2 * q.y * q.w,
-			2 * q.y * q.z + 2 * q.x * q.w,
-			1 - 2 * q.x * q.x - 2 * q.y * q.y
+			2.0 * q.x * q.z - 2.0 * q.y * q.w,
+			2.0 * q.y * q.z + 2.0 * q.x * q.w,
+			1.0 - 2.0 * q.x * q.x - 2.0 * q.y * q.y
 		}
 	);
 	return (m3);

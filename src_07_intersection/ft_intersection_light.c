@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:22:35 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/05 05:42:01 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/07 12:34:44 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,77 @@ t_vec3	ft_angle_of_incidence(const t_vec3 *ray_point, const t_vec3 *hit_axis)
 			ft_vec3_mult(*hit_axis, 2.0 * ft_vec3_dot(ft_vec3_mult(*ray_point, -1) , *hit_axis))));
 }
 
-bool	ft_light_light_intersection(t_L *light, t_C *camera, const t_vec3 *ray_point, t_vec3 *light_color, t_intersection *intersection)
+
+
+
+
+bool	ft_light_shadow(t_scene *scene, t_vec3 *coord, t_intersection *intersection_obj)
 {
-	(void)camera;
+	t_intersection	intersection;
+	t_vec3 			ray_point;
+	double			dist;
+	t_vec3			axis;
+	int				i;
+
+	i = 0;
+	axis = ft_vec3_sub(intersection_obj->hit_coord, *coord);
+	dist = sqrt(ft_vec3_dot(axis, axis)) - 0.00000001;
+	ray_point = ft_vec3_normalize(axis);
+	while (i < scene->obj_list->max_index)
+	{
+		if (ft_scn_obj_intersection(scene->obj_list->rt[i], coord, &ray_point, &intersection))
+		{
+			if (intersection.dist <= dist)
+			{
+				// if (intersection_obj->obj != intersection.obj)
+				// {
+					
+				// }
+				return (true);
+			}
+		}
+		i++;
+	}
+	return (false);
+}
+
+
+
+
+
+bool	ft_light_light_intersection(t_scene *scene, t_L *light, const t_vec3 *ray_point, t_vec3 *light_color, t_intersection *intersection)
+{
+	(void)scene;
 	t_vec3	r;
 	t_vec3 light_axis;
 	double angle;
 
+	light_axis = ft_vec3_normalize(ft_vec3_sub(light->coord, intersection->hit_coord));
 	r = ft_angle_of_incidence(ray_point, &intersection->hit_axis);
-	light_axis = ft_vec3_normalize(ft_vec3_sub(intersection->hit_point, light->coord));
-	angle = acos(ft_vec3_dot(ft_vec3_mult(light_axis, -1.0), r));
+	double test = ft_vec3_dot(light_axis, r);
+	angle = acos(test);
 	if (angle < M_PI / 2.0)
 	{
+		// if (ft_light_shadow(scene, &light->coord, intersection))
+		// 	return (false);
+		test  =(angle / (M_PI / 2.0));
 		*light_color = ft_vec3_mult(
 			ft_vector_3(
 				intersection->color.x * light->color.x,
 				intersection->color.y * light->color.y, 
 				intersection->color.z * light->color.z), 
-				light->ratio * (1.0 - (angle / (M_PI/ 2.0))));
+				light->ratio * (1.0 - fabs(angle / (M_PI / 2.0))));
 		return (true);
 	}
 	return (false);
 }
 
-bool	ft_scn_light_intersection(t_rt *light, t_C *camera, const t_vec3 *ray_point, t_vec3 *light_color, t_intersection *intersection)
+bool	ft_scn_light_intersection(t_scene *scene, t_rt *light, const t_vec3 *ray_point, t_vec3 *light_color, t_intersection *intersection)
 {
 	// if (!ft_strcmp(obj->type, "A"))
 	// 	result = ft_obj_plane_intersection((t_pl *)obj, camera, ray_point, intersection);
 	if (!ft_strcmp(light->type, "L"))
-		return (ft_light_light_intersection((t_L *)light, camera, ray_point, light_color, intersection));
+		return (ft_light_light_intersection(scene, (t_L *)light, ray_point, light_color, intersection));
 	return (false);
 }
 
@@ -71,8 +113,9 @@ bool	ft_light_intersection(t_scene *scene, const t_vec3 *ray_point, t_intersecti
 	while (i < scene->light_list->max_index)
 	{
 		light_color = ft_vector_3(0.0, 0.0, 0.0);
-		if (ft_scn_light_intersection(scene->light_list->rt[i], scene->camera_list->camera, ray_point, &light_color, intersection))
+		if (ft_scn_light_intersection(scene, scene->light_list->rt[i], ray_point, &light_color, intersection))
 		{
+			
 			all_color = ft_vec3_add(all_color, light_color);
 			light_count++;
 		}
