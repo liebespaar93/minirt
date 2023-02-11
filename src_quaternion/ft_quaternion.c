@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:37:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/05 06:21:18 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/10 19:23:00 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,12 @@ t_quaternion	ft_quaternion_multiply(t_quaternion q1, t_quaternion q2)
 	return (result);
 }
 
+double	ft_epsilon(double d)
+{
+	if (fabs(d) < 0.00001)
+		return (0.0);
+	return (d);
+}
 /**
  * @brief 
  * 
@@ -235,17 +241,17 @@ t_mtx3	ft_quaternion_rotate_matrix(t_quaternion q)
 
 	m3 = ft_matrix_3(
 		(double [3]){
-			1.0 - 2.0 * q.y * q.y - 2.0 * q.z * q.z, 
+			ft_epsilon(1.0 - 2.0 * q.y * q.y - 2.0 * q.z * q.z), 
 			2.0 * q.x * q.y - 2.0 * q.z * q.w, 
 			2.0 * q.x * q.z + 2.0 * q.y * q.w},
 		(double [3]){
 			2.0 * q.x * q.y + 2.0 * q.z * q.w,
-			1.0 - 2.0 * q.x * q.x - 2.0 * q.z * q.z,
+			ft_epsilon(1.0 - 2.0 * q.x * q.x - 2.0 * q.z * q.z),
 			2.0 * q.y * q.z - 2.0 * q.x * q.w},
 		(double [3]){
 			2.0 * q.x * q.z - 2.0 * q.y * q.w,
 			2.0 * q.y * q.z + 2.0 * q.x * q.w,
-			1.0 - 2.0 * q.x * q.x - 2.0 * q.y * q.y
+			ft_epsilon(1.0 - 2.0 * q.x * q.x - 2.0 * q.y * q.y)
 		}
 	);
 	return (m3);

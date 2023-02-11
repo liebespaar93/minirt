@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:06:55 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/07 03:55:51 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/09 03:02:25 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,8 @@ void	ft_intersection(t_scene *scene)
 	v3_target = ft_vector_3(0.0, 0.0, 1.0);
 	while (l < scene->pixel_size)
 	{
-		// ft_memset(&intersection, 0, sizeof(t_intersection)); 최적화
 		ray_point = ft_quaternion_rotate_vec3(scene->pixel_q[l], v3_target);
 		if (l == (scene->w * scene->h) / 2 + (scene->w / 2))
-		{
-			test = 1;
-			printf("center\n");
-		}
-		if (l == (scene->w * scene->h) / 2 + (scene->w / 6))
 		{
 			test = 1;
 			printf("center\n");

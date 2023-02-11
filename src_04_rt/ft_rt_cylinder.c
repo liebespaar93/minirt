@@ -6,12 +6,13 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:53:48 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/05 07:22:25 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/11 04:40:57 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <errno.h>
+#include <math.h>
 
 #include "ft_rt.h"
 #include "ft_minirt_tool.h"
@@ -37,6 +38,8 @@ void	ft_rt_cylinder(t_rt *rt, char *str)
 	ft_split_free(temp);
 
 	rt_cy->radius = rt_cy->diameter / 2.0;
+	rt_cy->q_axis = ft_quaternion_from_euler_angles(ft_vec3_mult(rt_cy->axis, M_PI));
+	rt_cy->point = ft_quaternion_rotate_vec3(rt_cy->q_axis, ft_vector_3(0.0, 0.0, 1.0));
 	ft_rt_addback(rt, rt_cy->type, (void *)rt_cy);
 }
 

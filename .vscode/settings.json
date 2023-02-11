@@ -33,6 +33,9 @@
 		"__locale": "c",
 		"sstream": "c",
 		"atomic": "c",
-		"bitset": "c"
+		"bitset": "c",
+		"ft_shadow.h": "c",
+		"complex": "c",
+		"cmath": "c"
 	}
 }

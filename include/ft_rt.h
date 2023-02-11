@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:31:13 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/05 07:21:59 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/11 04:15:53 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ typedef struct s_pl
 	t_vec3	coord;
 	t_vec3	axis;
 	t_vec3	color;
+
+
+	t_quaternion	q_axis;
+	t_vec3			point;
 }	t_pl;
 
 typedef struct s_cy
@@ -78,6 +82,8 @@ typedef struct s_cy
 
 
 	double	radius;
+	t_quaternion	q_axis;
+	t_vec3	point;
 }	t_cy;
 
 

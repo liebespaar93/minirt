@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/02/02 14:21:55 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/02/08 16:18:11 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC_04_RT_DIR = $(ROOTDIR)/src_04_rt
 SRC_05_SCENE_DIR = $(ROOTDIR)/src_05_scene
 SRC_06_RENDER_DIR = $(ROOTDIR)/src_06_render
 SRC_07_INTERSECTION_DIR = $(ROOTDIR)/src_07_intersection
+SRC_08_SHADOW_DIR = $(ROOTDIR)/src_08_shadow
 
 
 SRC_TOOL_DIR = $(ROOTDIR)/src_tool
@@ -101,6 +102,11 @@ SRC_07_INTERSECTION_SRC =	ft_intersection.c	\
 							ft_intersection_light.c
 					
 SRC_07_INTERSECTION_C = $(addprefix $(SRC_07_INTERSECTION_DIR)/, $(SRC_07_INTERSECTION_SRC))
+
+SRC_08_SHADOW_SRC = ft_shadow.c
+					
+SRC_08_SHADOW_C = $(addprefix $(SRC_08_SHADOW_DIR)/, $(SRC_08_SHADOW_SRC))
+
 
 
 SRC_TOOL_SRC =					\
@@ -182,6 +188,7 @@ OBJS =	$(SRC_01_MAIN_C:$(SRC_01_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_05_SCENE_C:$(SRC_05_SCENE_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_06_RENDER_C:$(SRC_06_RENDER_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_07_INTERSECTION_C:$(SRC_07_INTERSECTION_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_08_SHADOW_C:$(SRC_08_SHADOW_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)				\
 		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)			\
 		$(SRC_QUATERNION_C:$(SRC_QUATERNION_DIR)/%.c=$(OBJ_DIR)/%.o)	\
@@ -227,6 +234,9 @@ $(OBJ_DIR)/%.o : $(SRC_06_RENDER_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_07_INTERSECTION_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_08_SHADOW_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_TOOL_DIR)/%.c
