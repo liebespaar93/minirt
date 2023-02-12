@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/02/08 16:18:11 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/02/11 19:36:51 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC_TOOL_DIR = $(ROOTDIR)/src_tool
 SRC_VECTOR_DIR = $(ROOTDIR)/src_vector
 SRC_MATRIX_DIR = $(ROOTDIR)/src_matrix
 SRC_QUATERNION_DIR = $(ROOTDIR)/src_quaternion
+SRC_GEOMETRIC_TRANSFORM_DIR = $(ROOTDIR)/src_geometric_transform
 SRC_MLX_DIR = $(ROOTDIR)/src_mlx
 SRC_MLX_KEYBOARD_DIR = $(SRC_MLX_DIR)/src_mlx_keyboard
 SRC_MLX_MOUSE_DIR = $(SRC_MLX_DIR)/src_mlx_mouse
@@ -72,13 +73,13 @@ SRC_03_PARAM_C = $(addprefix $(SRC_03_PARAM_DIR)/, $(SRC_03_PARAM_SRC))
 
 
 SRC_04_RT_SRC =	ft_rt_ambient_lightning.c	\
-					ft_rt_camera.c		\
-					ft_rt_cylinder.c	\
-					ft_rt_light.c	\
-					ft_rt_plane.c	\
-					ft_rt_sphere.c	\
-					ft_rt_tool.c	\
-					ft_rt.c
+				ft_rt_camera.c		\
+				ft_rt_cylinder.c	\
+				ft_rt_light.c	\
+				ft_rt_plane.c	\
+				ft_rt_sphere.c	\
+				ft_rt_tool.c	\
+				ft_rt.c	
 	
 SRC_04_RT_C = $(addprefix $(SRC_04_RT_DIR)/, $(SRC_04_RT_SRC))
 
@@ -154,13 +155,20 @@ SRC_MATRIX_SRC =						\
 				ft_matrix_4.c			\
 				ft_matrix_4_rotation.c	\
 				ft_matrix_4_mult.c		\
-				ft_matrix_4_inverse.c
+				ft_matrix_4_inverse.c	\
+				ft_matirx_to.c
 
 SRC_MATRIX_C = $(addprefix $(SRC_MATRIX_DIR)/, $(SRC_MATRIX_SRC))
+
 
 SRC_QUATERNION_SRC =	ft_quaternion.c
 
 SRC_QUATERNION_C = $(addprefix $(SRC_QUATERNION_DIR)/, $(SRC_QUATERNION_SRC))
+
+
+SRC_GEOMETRIC_TRANSFORM_SRC =	ft_geometric_transform.c
+
+SRC_GEOMETRIC_TRANSFORM_C = $(addprefix $(SRC_GEOMETRIC_TRANSFORM_DIR)/, $(SRC_GEOMETRIC_TRANSFORM_SRC))
 
 
 SRC_MLX_KEYBOARD_SRC =						\
@@ -192,6 +200,7 @@ OBJS =	$(SRC_01_MAIN_C:$(SRC_01_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_TOOL_C:$(SRC_TOOL_DIR)/%.c=$(OBJ_DIR)/%.o)				\
 		$(SRC_VECTOR_C:$(SRC_VECTOR_DIR)/%.c=$(OBJ_DIR)/%.o)			\
 		$(SRC_QUATERNION_C:$(SRC_QUATERNION_DIR)/%.c=$(OBJ_DIR)/%.o)	\
+		$(SRC_GEOMETRIC_TRANSFORM_C:$(SRC_GEOMETRIC_TRANSFORM_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_MATRIX_C:$(SRC_MATRIX_DIR)/%.c=$(OBJ_DIR)/%.o)			\
 		$(SRC_MLX_KEYBOARD_C:$(SRC_MLX_KEYBOARD_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_MLX_MOUSE_C:$(SRC_MLX_MOUSE_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -246,6 +255,9 @@ $(OBJ_DIR)/%.o : $(SRC_VECTOR_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_QUATERNION_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+	
+$(OBJ_DIR)/%.o : $(SRC_GEOMETRIC_TRANSFORM_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 	
 $(OBJ_DIR)/%.o : $(SRC_MATRIX_DIR)/%.c

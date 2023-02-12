@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:57 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/09 02:58:03 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/12 08:51:56 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ bool	ft_shadow(t_scene *scene, t_vec3 *coord, t_intersection *intersection_obj)
 
 	i = 0;
 	axis = ft_vec3_sub(intersection_obj->hit_coord, *coord);
-	dist = sqrt(ft_vec3_dot(axis, axis)) - 0.00000001;
+	dist = sqrt(ft_vec3_dot(axis, axis)) - 0.000001;
 	ray_point = ft_vec3_normalize(axis);
 	while (i < scene->obj_list->max_index)
 	{
 		if (ft_scn_obj_intersection(scene->obj_list->rt[i], coord, &ray_point, &intersection))
 		{
+			intersection.obj = scene->obj_list->rt[i];
 			if (intersection.dist <= dist)
 			{
 				return (true);

@@ -36,6 +36,10 @@
 		"bitset": "c",
 		"ft_shadow.h": "c",
 		"complex": "c",
-		"cmath": "c"
+		"cmath": "c",
+		"ft_rt_geometric_transform.h": "c",
+		"ft_geometric_transform.h": "c",
+		"chrono": "c",
+		"variant": "c"
 	}
 }

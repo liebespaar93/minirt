@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:22:35 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/10 19:10:43 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/12 20:16:29 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,18 @@ double	ft_light_specular_reflection(const t_vec3 *ray_point, const t_vec3 *light
 
 bool	ft_light_light_intersection(t_scene *scene, t_L *light, const t_vec3 *ray_point, t_vec3 *light_color, t_intersection *intersection)
 {
-	(void)scene;
+	(void)ray_point;
 	double	angle;
 	t_vec3	light_point;
-
 
 	light_point = ft_vec3_normalize(ft_vec3_sub(light->coord, intersection->hit_coord));
 	if (1)
 		angle = ft_light_diffuse_reflection(&light_point, &intersection->hit_point);
-	if (0)
-		angle = ft_light_specular_reflection(ray_point, &light_point, &intersection->hit_point);
 
 	if (angle < M_PI / 1.0)
 	{
-		// if (ft_shadow(scene, &light->coord, intersection))
-		// 	return (false);
+		if (ft_shadow(scene, &light->coord, intersection))
+			return (false);
 		*light_color = ft_vec3_mult(
 			ft_vector_3(
 				intersection->color.x * light->color.x,
@@ -92,9 +89,9 @@ bool	ft_light_ambient_intersection(t_scene *scene, t_A *light, const t_vec3 *ray
 bool	ft_scn_light_intersection(t_scene *scene, t_rt *light, const t_vec3 *ray_point, t_vec3 *light_color, t_intersection *intersection)
 {
 	if (!ft_strcmp(light->type, "A"))
-		return (ft_light_ambient_intersection(scene, (t_A *)light, ray_point, light_color, intersection));
+		return (ft_light_ambient_intersection(scene, (t_A *)light->data, ray_point, light_color, intersection));
 	else if (!ft_strcmp(light->type, "L"))
-		return (ft_light_light_intersection(scene, (t_L *)light, ray_point, light_color, intersection));
+		return (ft_light_light_intersection(scene, (t_L *)light->data, ray_point, light_color, intersection));
 	return (false);
 }
 

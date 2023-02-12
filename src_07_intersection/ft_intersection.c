@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:06:55 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/09 03:02:25 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/12 20:10:48 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ void	ft_intersection(t_scene *scene)
 		}
 		if (ft_obj_intersection(scene, &scene->camera_list->camera->coord, &ray_point, &intersection))
 		{
-			// 물체 표면에 따라 다음에 만들기
-			//if (obj_option)
-			// {
-			//		ft_material_base_compute_color;
-			// }
-			//else
-			// {
 			ft_light_intersection(scene, &ray_point, &intersection);
 			ft_image_set_pixel(scene->image, l, &intersection.color);
 			if (test)
@@ -56,9 +49,6 @@ void	ft_intersection(t_scene *scene)
 				intersection.color.z = 0.0;
 				ft_image_set_pixel(scene->image, l, &intersection.color);
 			}
-
-
-			// }
 
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:51:54 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/04 17:43:03 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/11 19:30:43 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_vec3	ft_mtx3_mult_vec3(t_mtx3 m3, t_vec3 v3);
 t_mtx4	ft_matrix_4(double *m1, double *m2, double *m3, double *m4);
 t_mtx4	ft_mtx4_identity(void);
 t_mtx4	ft_mtx4_translation(double x, double y, double z);
+t_mtx4	ft_mtx4_scale(double x, double y, double z);
 t_mtx4	ft_mtx4_projection(double d);
 t_mtx4	ft_mtx4_mult_scalar(t_mtx4 m4, double scalar);
 t_vec3	ft_vec3_mult_mtx4(t_vec3 v3, t_mtx4 m4);
@@ -97,5 +98,10 @@ t_mtx4	ft_mtx4_mult_mtx4(t_mtx4 m4_1, t_mtx4 m4_2);
 t_mtx4	ft_mtx4_rot_x(double angle);
 t_mtx4	ft_mtx4_rot_y(double angle);
 t_mtx4	ft_mtx4_rot_z(double angle);
+
+t_mtx4	ft_mtx4_inverse(t_mtx4 m4);
+
+/* ft_matrix_to */
+t_mtx4	ft_mtx3_to_mtx4(t_mtx3 m3);
 
 #endif

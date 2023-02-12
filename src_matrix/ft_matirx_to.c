@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_scene_light.h                                   :+:      :+:    :+:   */
+/*   ft_matirx_to.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 14:50:28 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/12 20:15:05 by kyoulee          ###   ########.fr       */
+/*   Created: 2023/02/11 19:26:30 by kyoulee           #+#    #+#             */
+/*   Updated: 2023/02/11 19:30:48 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SCENE_LIGHT_H
-# define FT_SCENE_LIGHT_H
+#include "ft_matrix.h"
 
-# include "ft_rt.h"
-
-typedef	struct s_scn_light
+t_mtx4	ft_mtx3_to_mtx4(t_mtx3 m3)
 {
-	/* data */
-	int		index;
-	int		max_index;
-
-	t_rt	**rt;
+	t_mtx4	m4;
 	
-}	t_scn_light;
-
-
-t_scn_light	*ft_scn_light_set(t_rt *rt);
-void	ft_scn_light_free(t_scn_light **light_ptr);
-
-#endif
+	m4 = ft_matrix_4(\
+		(double [4]){m3.m11, m3.m12, m3.m13, 0}, \
+		(double [4]){m3.m21, m3.m22, m3.m23, 0}, \
+		(double [4]){m3.m31, m3.m32, m3.m33, 0}, \
+		(double [4]){0, 0, 0, 1});
+	return (m4);
+}

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:51:47 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/10 09:08:39 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/12 05:06:13 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,10 @@ void	ft_rt_plane(t_rt *rt, char *str)
 	rt_pl->type = ft_strdup(temp[0]);
 	rt_pl->coord = ft_rt_vec3(temp[1]);
 	rt_pl->axis = ft_rt_vec3(temp[2]);
-
-	
-	if (!ft_vec3_norm(rt_pl->axis))
-		rt_pl->axis = ft_vector_3(0.0, 1.0, 0.0);
 	rt_pl->color = ft_rt_color(temp[3]);
 	ft_split_free(temp);
 
-	rt_pl->q_axis = ft_quaternion_from_euler_angles(ft_vec3_mult(rt_pl->axis, M_PI));
-	rt_pl->point = ft_quaternion_rotate_vec3(rt_pl->q_axis, ft_vector_3(0.0, 0.0, 1.0));
-	// 백터 만들기
+	rt_pl->gt = ft_gt_set(rt_pl->coord, rt_pl->axis, ft_vector_3(1.0, 1.0, 1.0));
 	
 	ft_rt_addback(rt, rt_pl->type, (void *)rt_pl);
 }

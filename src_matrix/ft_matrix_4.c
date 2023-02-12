@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 07:16:36 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/04 17:11:28 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/14 19:54:38 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ t_mtx4	ft_mtx4_translation(double x, double y, double z)
 	return (new);
 }
 
+t_mtx4	ft_mtx4_scale(double x, double y, double z)
+{
+	t_mtx4		new;
+
+	new = ft_matrix_4(\
+		(double [4]){x, 0, 0, 0}, \
+		(double [4]){0, y, 0, 0}, \
+		(double [4]){0, 0, z, 0}, \
+		(double [4]){0, 0, 0, 1});
+	return (new);
+}
+
 t_mtx4	ft_mtx4_projection(double d)
 {
 	t_mtx4	new;
@@ -70,3 +82,5 @@ t_mtx4	ft_mtx4_projection(double d)
 		(double [4]){0, 0, 1 / d, 1});
 	return (new);
 }
+
+

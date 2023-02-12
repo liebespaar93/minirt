@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 15:01:55 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 18:55:20 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/12 04:32:14 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_scn_obj	*ft_scn_obj_set(t_rt *rt)
 		if (!ft_strcmp(rt[i].type, "pl") || \
 			!ft_strcmp(rt[i].type, "sp") || \
 			!ft_strcmp(rt[i].type, "cy"))
-			obj->rt[obj->index++] = rt[i].data;
+			obj->rt[obj->index++] = &rt[i];
 		i++;
 	}
 	obj->index = 0;
