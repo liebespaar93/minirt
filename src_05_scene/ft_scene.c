@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:52:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/30 22:30:14 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 05:05:48 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_scene	*ft_scene_init(t_rt *rt, int x_size, int y_size)
 	scene->w = x_size;
 	scene->h = y_size;
 	scene->pixel_size = x_size * y_size;
-	if (!ft_zeromalloc((void **)&scene->pixel_q, sizeof(t_quaternion) * (scene->pixel_size)))
+	if (!ft_zeromalloc((void **)&scene->pixel_q, \
+		sizeof(t_quaternion) * (scene->pixel_size)))
 		ft_exit_print_error(ENOMEM, "ft_scene_init()");
 	scene->image = ft_image_init(x_size, y_size);
 	scene->camera_list = ft_scn_camera_set(rt);
