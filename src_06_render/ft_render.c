@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:25:40 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/14 05:37:04 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:02:25 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ void	ft_render(t_param *param)
 	ft_image_display(param->scene->image, param->renderer->endian);
 	gettimeofday(&stop, NULL);
 	printf("time : %ld\n", (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec);
+	
 }

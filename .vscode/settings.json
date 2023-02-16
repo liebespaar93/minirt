@@ -41,6 +41,9 @@
 		"ft_geometric_transform.h": "c",
 		"chrono": "c",
 		"variant": "c",
-		"unordered_map": "c"
+		"unordered_map": "c",
+		"time.h": "c",
+		"ft_render.h": "c",
+		"ft_fd.h": "c"
 	}
 }

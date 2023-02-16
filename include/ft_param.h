@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:02:21 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/06 15:28:22 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:04:24 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include "ft_scene.h"
 # include "ft_mac_keyboard.h"
 # include "ft_mac_mouse.h"
+# include "ft_mac_win.h"
 
 typedef struct s_mlx
 {
@@ -65,7 +66,7 @@ typedef struct s_param
 
 	t_keyboard	*keyboard;
 	t_mouse		*mouse;
-	int			fram;
+	int			frame;
 }	t_param;
 
 t_param	*ft_param_init(void);

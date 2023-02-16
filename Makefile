@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/02/11 19:36:51 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/02/17 03:57:18 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC_GEOMETRIC_TRANSFORM_DIR = $(ROOTDIR)/src_geometric_transform
 SRC_MLX_DIR = $(ROOTDIR)/src_mlx
 SRC_MLX_KEYBOARD_DIR = $(SRC_MLX_DIR)/src_mlx_keyboard
 SRC_MLX_MOUSE_DIR = $(SRC_MLX_DIR)/src_mlx_mouse
+SRC_MLX_WIN_DIR = $(SRC_MLX_DIR)/src_mlx_win
 
 ## MODULES ##
 MINILIBX_DIR = $(ROOTDIR)/modules/minilibx_opengl_20191021
@@ -189,6 +190,11 @@ SRC_MLX_MOUSE_SRC =						\
 SRC_MLX_MOUSE_C = $(addprefix $(SRC_MLX_MOUSE_DIR)/, $(SRC_MLX_MOUSE_SRC))
 
 
+SRC_MLX_WIN_SRC =	ft_mac_win.c
+
+SRC_MLX_WIN_C = $(addprefix $(SRC_MLX_WIN_DIR)/, $(SRC_MLX_WIN_SRC))
+
+
 OBJS =	$(SRC_01_MAIN_C:$(SRC_01_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_02_FD_C:$(SRC_02_FD_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_03_PARAM_C:$(SRC_03_PARAM_DIR)/%.c=$(OBJ_DIR)/%.o)	\
@@ -203,7 +209,8 @@ OBJS =	$(SRC_01_MAIN_C:$(SRC_01_MAIN_DIR)/%.c=$(OBJ_DIR)/%.o)		\
 		$(SRC_GEOMETRIC_TRANSFORM_C:$(SRC_GEOMETRIC_TRANSFORM_DIR)/%.c=$(OBJ_DIR)/%.o)	\
 		$(SRC_MATRIX_C:$(SRC_MATRIX_DIR)/%.c=$(OBJ_DIR)/%.o)			\
 		$(SRC_MLX_KEYBOARD_C:$(SRC_MLX_KEYBOARD_DIR)/%.c=$(OBJ_DIR)/%.o)	\
-		$(SRC_MLX_MOUSE_C:$(SRC_MLX_MOUSE_DIR)/%.c=$(OBJ_DIR)/%.o)
+		$(SRC_MLX_MOUSE_C:$(SRC_MLX_MOUSE_DIR)/%.c=$(OBJ_DIR)/%.o)			\
+		$(SRC_MLX_WIN_C:$(SRC_MLX_WIN_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 OBJS_CLEAN = $(OBJS)
 
@@ -267,6 +274,9 @@ $(OBJ_DIR)/%.o : $(SRC_MLX_KEYBOARD_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o : $(SRC_MLX_MOUSE_DIR)/%.c
+	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_MLX_WIN_DIR)/%.c
 	$(CC) $(CXXFLAGS) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 ## MODULES ##
