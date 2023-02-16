@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 11:41:12 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/27 12:56:26 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:09:14 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	ft_open_type(const char *filename, int option, char *type)
 {
 	int		fd;
 	int		len[2];
-
 
 	len[0] = ft_strlen(filename);
 	len[1] = ft_strlen(type);
