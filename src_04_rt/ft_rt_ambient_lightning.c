@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 11:06:20 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/05 04:31:12 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:35:57 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,31 @@
 
 void	ft_rt_ambient_lightning(t_rt *rt, char *str)
 {
-	t_A		*rt_A;
-	//int		index;
+	t_A		*rt_a;
 	char	**temp;
 
-	rt_A = malloc(sizeof(t_A));
-	if (!rt_A)
+	rt_a = malloc(sizeof(t_A));
+	if (!rt_a)
 		ft_exit_print_error(ENOMEM, "ft_rt_ambient_lightning()");
 	temp = ft_split(str, ' ');
 	if (ft_ptrlen((void **)&temp, "char **") != 3)
 		ft_exit_print_error(EBADF, "ft_rt_ambient_lightning()");
-	rt_A->type = ft_strdup(temp[0]);
-	rt_A->ratio = ft_atof(temp[1]);
-	rt_A->color = ft_rt_color(temp[2]);
+	rt_a->type = ft_strdup(temp[0]);
+	rt_a->ratio = ft_atof(temp[1]);
+	rt_a->color = ft_rt_color(temp[2]);
 	ft_split_free(temp);
-	ft_rt_addback(rt, rt_A->type, (void *)rt_A);
+	ft_rt_addback(rt, rt_a->type, (void *)rt_a);
 }
 
-
-void	ft_rt_ambient_lightning_free(t_A **rt_A_ptr)
+void	ft_rt_ambient_lightning_free(t_A **rt_a_ptr)
 {
-	t_A		*rt_A;
+	t_A		*rt_a;
 
-	if (!rt_A_ptr)
+	if (!rt_a_ptr)
 		return ;
-	rt_A = *rt_A_ptr;
-	if (rt_A->type)
-		free(rt_A->type);
-	free(*rt_A_ptr);
-	*rt_A_ptr = NULL;
+	rt_a = *rt_a_ptr;
+	if (rt_a->type)
+		free(rt_a->type);
+	free(*rt_a_ptr);
+	*rt_a_ptr = NULL;
 }

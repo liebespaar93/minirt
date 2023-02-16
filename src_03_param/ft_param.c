@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:58:32 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:14:29 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:25:51 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ t_renderer	*ft_renderer_set(void *img_ptr)
 
 	if (!ft_zeromalloc((void **)&renderer, sizeof(t_renderer)))
 		ft_exit_print_error(ENOMEM, "ft_renderer_set()");
-	renderer->buffer = mlx_get_data_addr(
-			img_ptr,
-			&renderer->bits_per_pixel,
-			&renderer->size_line,
-			&renderer->endian);
+	renderer->buffer = mlx_get_data_addr(\
+		img_ptr, \
+		&renderer->bits_per_pixel, \
+		&renderer->size_line, \
+		&renderer->endian);
 	if (!renderer->buffer)
 		ft_exit_print_error(EFAULT, "ft_renderer_set() -> mlx_get_data_addr()");
 	return (renderer);

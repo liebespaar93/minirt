@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:53:48 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/14 00:30:22 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:27:33 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 void	ft_rt_cylinder(t_rt *rt, char *str)
 {
 	t_cy	*rt_cy;
-	//int		index;
 	char	**temp;
 
 	rt_cy = malloc(sizeof(t_cy));
@@ -36,9 +35,8 @@ void	ft_rt_cylinder(t_rt *rt, char *str)
 	rt_cy->height = ft_atof(temp[4]);
 	rt_cy->color = ft_rt_color(temp[5]);
 	ft_split_free(temp);
-
-	rt_cy->gt = ft_gt_set(rt_cy->coord, rt_cy->axis, ft_vector_3(1.0, 1.0, 1.0));
-
+	rt_cy->gt = ft_gt_set(\
+		rt_cy->coord, rt_cy->axis, ft_vector_3(1.0, 1.0, 1.0));
 	rt_cy->radius = rt_cy->diameter * 0.5;
 	ft_rt_addback(rt, rt_cy->type, (void *)rt_cy);
 }

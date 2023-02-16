@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:51:47 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/14 03:35:58 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:26:44 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 void	ft_rt_plane(t_rt *rt, char *str)
 {
 	t_pl	*rt_pl;
-	//int		index;
 	char	**temp;
 
 	rt_pl = malloc(sizeof(t_pl));
@@ -34,9 +33,8 @@ void	ft_rt_plane(t_rt *rt, char *str)
 	rt_pl->axis = ft_rt_vec3(temp[2]);
 	rt_pl->color = ft_rt_color(temp[3]);
 	ft_split_free(temp);
-
-	rt_pl->gt = ft_gt_set(rt_pl->coord, rt_pl->axis, ft_vector_3(1.0, 1.0, 1.0));
-	
+	rt_pl->gt = ft_gt_set(\
+		rt_pl->coord, rt_pl->axis, ft_vector_3(1.0, 1.0, 1.0));
 	ft_rt_addback(rt, rt_pl->type, (void *)rt_pl);
 }
 

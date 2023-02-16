@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:11:44 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:24:53 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int	ft_key_update(t_scene *scene, t_keyboard *keyboard)
 	v3_move = ft_vec3_mult(v3_move, keyboard->y * -0.1);
 	camera->coord = ft_vec3_sub(camera->coord, v3_move);
 	keyboard->y = 0;
-	v3_move = ft_quaternion_rotate_vec3(
-			camera->q_axis, ft_vector_3(1.0, 0.0, 0.0));
+	v3_move = ft_quaternion_rotate_vec3(\
+		camera->q_axis, ft_vector_3(1.0, 0.0, 0.0));
 	v3_move = ft_vec3_mult(v3_move, keyboard->x * -0.1);
 	camera->coord = ft_vec3_sub(camera->coord, v3_move);
 	keyboard->x = 0;
 	if (keyboard->z)
-		camera->q_axis = ft_quaternion_normalize(
-				ft_quaternion_multiply(camera->q_axis,
-					ft_quaternion_rotation_z(keyboard->z * -0.1)));
+		camera->q_axis = ft_quaternion_normalize(\
+			ft_quaternion_multiply(camera->q_axis, \
+				ft_quaternion_rotation_z(keyboard->z * -0.1)));
 	keyboard->z = 0;
 	return (1);
 }
@@ -63,14 +63,14 @@ int	ft_mouse_update(t_scene *scene, t_mouse *mouse)
 	camera = scene->camera_list->camera;
 	if (!mouse->x_angle && !mouse->y_angle)
 		return (0);
-	r_x = ft_quaternion_normalize(
-			ft_quaternion_rotation_y(mouse->x_angle * 0.01));
-	r_y = ft_quaternion_normalize(
-			ft_quaternion_rotation_x(mouse->y_angle * 0.01));
-	camera->q_axis = ft_quaternion_normalize(
-			ft_quaternion_multiply(camera->q_axis, r_x));
-	camera->q_axis = ft_quaternion_normalize(
-			ft_quaternion_multiply(camera->q_axis, r_y));
+	r_x = ft_quaternion_normalize(\
+		ft_quaternion_rotation_y(mouse->x_angle * 0.01));
+	r_y = ft_quaternion_normalize(\
+		ft_quaternion_rotation_x(mouse->y_angle * 0.01));
+	camera->q_axis = ft_quaternion_normalize(\
+		ft_quaternion_multiply(camera->q_axis, r_x));
+	camera->q_axis = ft_quaternion_normalize(\
+		ft_quaternion_multiply(camera->q_axis, r_y));
 	mouse->x_angle = 0;
 	mouse->y_angle = 0;
 	return (1);
@@ -89,7 +89,7 @@ void	ft_mlx_key_mouse_win_set(t_param *param)
 int	ft_loop_event(t_param *param)
 {
 	if (ft_key_update(param->scene, param->keyboard) || \
-		ft_mouse_update(param->scene, param->mouse)
+		ft_mouse_update(param->scene, param->mouse) \
 		|| !param->frame)
 	{
 		ft_render(param);

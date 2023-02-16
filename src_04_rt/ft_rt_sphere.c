@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:50:23 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/12 07:43:40 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:23:15 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 void	ft_rt_sphere(t_rt *rt, char *str)
 {
 	t_sp	*rt_sp;
-	//int		index;
 	char	**temp;
 
 	rt_sp = malloc(sizeof(t_sp));
@@ -33,8 +32,9 @@ void	ft_rt_sphere(t_rt *rt, char *str)
 	rt_sp->diameter = ft_atof(temp[2]);
 	rt_sp->color = ft_rt_color(temp[3]);
 	ft_split_free(temp);
-
-	rt_sp->gt = ft_gt_set(rt_sp->coord, ft_vector_3(0.0, 0.0, 0.0), ft_vec3_mult(ft_vector_3(1.0 ,1.0, 1.0), rt_sp->diameter * 0.5));
+	rt_sp->gt = ft_gt_set(rt_sp->coord, \
+		ft_vector_3(0.0, 0.0, 0.0), \
+		ft_vec3_mult(ft_vector_3(1.0, 1.0, 1.0), rt_sp->diameter * 0.5));
 	rt_sp->radius = rt_sp->diameter * 0.5;
 	ft_rt_addback(rt, rt_sp->type, (void *)rt_sp);
 }

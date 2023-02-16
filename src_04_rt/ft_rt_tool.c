@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 13:42:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/05 04:39:55 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:36:35 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_color_check(int color)
 {
 	if (!(0 <= color && color < 256))
 		ft_exit_print_error(EBADF, "ft_color_check()");
-	return (color);	
+	return (color);
 }
 
 t_vec3	ft_rt_color(char *str)
@@ -54,7 +54,7 @@ t_vec3	ft_rt_vec3(char *str)
 	return (vec);
 }
 
-
+/*
 #include <stdio.h>
 void	ft_rt_printf(t_rt rt)
 {
@@ -123,5 +123,5 @@ void	ft_rt_printf(t_rt rt)
 			((t_cy *)rt.data)->color.z);
 	else
 		printf("error rt!!");
-	
 }
+*/

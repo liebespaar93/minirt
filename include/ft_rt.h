@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:31:13 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/12 23:05:56 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:37:26 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ t_vec3	ft_rt_vec3(char *str);
 
 
 void	ft_rt_ambient_lightning(t_rt *rt, char *str);
-void	ft_rt_ambient_lightning_free(t_A **rt_A_ptr);
+void	ft_rt_ambient_lightning_free(t_A **rt_a_ptr);
 void	ft_rt_camera(t_rt *rt, char *str);
-void	ft_rt_camera_free(t_C **rt_C_ptr);
+void	ft_rt_camera_free(t_C **rt_c_ptr);
 void	ft_rt_light(t_rt *rt, char *str);
-void	ft_rt_light_free(t_L **rt_L_ptr);
+void	ft_rt_light_free(t_L **rt_l_ptr);
 void	ft_rt_sphere(t_rt *rt, char *str);
 void	ft_rt_sphere_free(t_sp **rt_sp_ptr);
 void	ft_rt_plane(t_rt *rt, char *str);
@@ -109,7 +109,8 @@ void	ft_rt_plane_free(t_pl **rt_pl_ptr);
 void	ft_rt_cylinder(t_rt *rt, char *str);
 void	ft_rt_cylinder_free(t_cy **rt_cy_ptr);
 
-
+/*
 void	ft_rt_printf(t_rt rt);
+*/
 
 #endif
