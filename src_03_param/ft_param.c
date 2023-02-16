@@ -6,13 +6,14 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 13:58:32 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:25:51 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 05:03:54 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <errno.h>
-#include <mlx.h>
+
+#include "mlx.h"
 
 #include "ft_param.h"
 #include "ft_minirt_tool.h"

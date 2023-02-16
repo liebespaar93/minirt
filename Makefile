@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/02/17 03:57:18 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/02/17 05:02:15 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,7 @@ SRC_04_RT_C = $(addprefix $(SRC_04_RT_DIR)/, $(SRC_04_RT_SRC))
 
 SRC_05_SCENE_SRC =	ft_scene_camera.c	\
 					ft_scene_image.c	\
+					ft_scene_image_set.c\
 					ft_scene_light.c	\
 					ft_scene_obj.c	\
 					ft_scene.c
