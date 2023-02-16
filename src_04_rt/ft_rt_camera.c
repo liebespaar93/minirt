@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 14:52:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/12 08:27:25 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/14 05:05:43 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_rt_camera(t_rt *rt, char *str)
 	rt_C->coord = ft_rt_vec3(temp[1]);
 	rt_C->axis = ft_rt_vec3(temp[2]);
 	rt_C->fov = ft_atof(temp[3]);
-	rt_C->q_axis = ft_quaternion_from_euler_angles(ft_vec3_mult(rt_C->axis, M_PI));
+	rt_C->q_axis = ft_quaternion_rotation_xyz(ft_vec3_mult(rt_C->axis, M_PI));
 	ft_split_free(temp);
 	ft_rt_addback(rt, rt_C->type, (void *)rt_C);
 }

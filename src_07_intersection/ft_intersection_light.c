@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:22:35 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/12 20:16:29 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/13 23:38:26 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	ft_light_light_intersection(t_scene *scene, t_L *light, const t_vec3 *ray_p
 	if (1)
 		angle = ft_light_diffuse_reflection(&light_point, &intersection->hit_point);
 
-	if (angle < M_PI / 1.0)
+	if (angle < M_PI)
 	{
 		if (ft_shadow(scene, &light->coord, intersection))
 			return (false);

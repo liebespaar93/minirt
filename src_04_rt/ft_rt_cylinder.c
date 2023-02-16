@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 11:53:48 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/11 21:24:42 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/14 00:30:22 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_rt_cylinder(t_rt *rt, char *str)
 
 	rt_cy->gt = ft_gt_set(rt_cy->coord, rt_cy->axis, ft_vector_3(1.0, 1.0, 1.0));
 
-	rt_cy->point = ft_quaternion_rotate_vec3(rt_cy->gt.q_rotation, ft_vector_3(0.0, 0.0, 1.0));
+	rt_cy->radius = rt_cy->diameter * 0.5;
 	ft_rt_addback(rt, rt_cy->type, (void *)rt_cy);
 }
 

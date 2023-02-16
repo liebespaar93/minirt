@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:24:24 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/03 18:21:57 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/14 04:14:30 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	ft_keydown_move(int keycode, t_keyboard *keyboard)
 
 	f = 0;
 	if ((keycode == KEY_ARROW_U || keycode == KEY_W) && ++f)
-		keyboard->y--;
-	else if ((keycode == KEY_ARROW_D || keycode == KEY_S) && ++f)
 		keyboard->y++;
+	else if ((keycode == KEY_ARROW_D || keycode == KEY_S) && ++f)
+		keyboard->y--;
 	else if ((keycode == KEY_ARROW_R || keycode == KEY_D) && ++f)
 		keyboard->x++;
 	else if ((keycode == KEY_ARROW_L || keycode == KEY_A) && ++f)

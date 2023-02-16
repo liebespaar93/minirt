@@ -40,6 +40,7 @@
 		"ft_rt_geometric_transform.h": "c",
 		"ft_geometric_transform.h": "c",
 		"chrono": "c",
-		"variant": "c"
+		"variant": "c",
+		"unordered_map": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 15:36:39 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/12 06:42:55 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/14 05:59:44 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_gt	ft_gt_default()
 	t_gt	gt;
 
 	gt.translation = ft_vector_3(0.0, 0.0, 0.0);
-	gt.q_rotation = ft_quaternion_from_euler_angles(ft_vector_3(0.0, 0.0, 0.0));
+	gt.q_rotation = ft_quaternion_from_euler_angles(ft_vector_3(0.0, 0.0, 1.0));
 	gt.scaler = ft_vector_3(1.0, 1.0, 1.0);
 	gt.forward_tf_mtx = ft_mtx4_identity();
 	gt.back_tf_mtx = ft_mtx4_identity();

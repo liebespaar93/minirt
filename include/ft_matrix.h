@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:51:54 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/11 19:30:43 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 03:15:25 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ t_mtx4	ft_mtx4_rot_y(double angle);
 t_mtx4	ft_mtx4_rot_z(double angle);
 
 t_mtx4	ft_mtx4_inverse(t_mtx4 m4);
+t_mtx3	ft_mtx3_inverse(t_mtx3 m3);
 
 /* ft_matrix_to */
 t_mtx4	ft_mtx3_to_mtx4(t_mtx3 m3);

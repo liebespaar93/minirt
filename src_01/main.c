@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/07 00:03:37 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/14 05:20:11 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,19 @@ int	ft_key_update(t_scene *scene, t_keyboard *keyboard)
 		return (0);
 	
 	v3_move = ft_quaternion_rotate_vec3(camera->q_axis, v3_target);
-	v3_move = ft_vec3_mult(v3_move, keyboard->y * 0.1);
+	v3_move = ft_vec3_mult(v3_move, keyboard->y * -0.1);
 	camera->coord = ft_vec3_sub(camera->coord, v3_move);
 	keyboard->y = 0;
 
-	v3_move = ft_quaternion_rotate_vec3(camera->q_axis, ft_vector_3(-1.0,0.0,0.0));
-	v3_move = ft_vec3_mult(v3_move, keyboard->x * 0.1);
+	v3_move = ft_quaternion_rotate_vec3(camera->q_axis, ft_vector_3(1.0,0.0,0.0));
+	v3_move = ft_vec3_mult(v3_move, keyboard->x * -0.1);
 	camera->coord = ft_vec3_sub(camera->coord, v3_move);
 	keyboard->x = 0;
 
 	if (keyboard->z)
 	{
-		r_z = ft_quaternion_rotation_z(-keyboard->z * 0.1);
-		camera->q_axis = ft_quaternion_multiply(camera->q_axis, r_z);
+		r_z = ft_quaternion_rotation_z(keyboard->z * -0.1);
+		camera->q_axis = ft_quaternion_normalize(ft_quaternion_multiply(camera->q_axis, r_z));
 		keyboard->z = 0;
 	}
 	return (1);
@@ -78,11 +78,11 @@ int	ft_mouse_update(t_scene *scene, t_mouse *mouse)
 		return (0);
 
 
-	r_x = ft_quaternion_rotation_y(mouse->x_angle * 0.01);
-	r_y = ft_quaternion_rotation_x(mouse->y_angle * 0.01);
+	r_x = ft_quaternion_normalize(ft_quaternion_rotation_y(mouse->x_angle * 0.01));
+	r_y = ft_quaternion_normalize(ft_quaternion_rotation_x(mouse->y_angle * 0.01));
 
-	camera->q_axis = ft_quaternion_multiply(camera->q_axis, r_x);
-	camera->q_axis = ft_quaternion_multiply(camera->q_axis, r_y);
+	camera->q_axis = ft_quaternion_normalize(ft_quaternion_multiply(camera->q_axis, r_x));
+	camera->q_axis = ft_quaternion_normalize(ft_quaternion_multiply(camera->q_axis, r_y));
 	mouse->x_angle = 0;
 	mouse->y_angle = 0;
 	return (1);
@@ -107,6 +107,7 @@ void	ft_mlx_key_mouse_set(t_param *param)
 }
 
 #include <sys/time.h>
+#include <math.h>
 int	ft_loop_event(t_param *param)
 {
 	t_C	*camera;
@@ -116,6 +117,8 @@ int	ft_loop_event(t_param *param)
 	gettimeofday(&start, NULL);
 	camera = param->scene->camera_list->camera;
 	axis = ft_quaternion_to_euler_angles(camera->q_axis);
+	// printf("║ 위치   : %+6.2f,%+6.2f,%+6.2f  ║\n", axis.x, axis.y, axis.z);
+	t_vec3 v3_move = ft_quaternion_rotate_vec3(camera->q_axis, ft_vector_3(0.0, 0.0, -1.0));
 	if (ft_key_update(param->scene, param->keyboard) || \
 		ft_mouse_update(param->scene, param->mouse))
 	{
@@ -123,9 +126,13 @@ int	ft_loop_event(t_param *param)
 		ft_memcpy(param->renderer->buffer, param->scene->image->back_buffer, param->renderer->size_line * SCENE_HEIGHT);
 		mlx_put_image_to_window(param->mlx->mlx_ptr, param->mlx->win_ptr, param->mlx->img_ptr, SCENE_X, SCENE_Y);
 		gettimeofday(&stop, NULL);
-		printf("%d time : %ld\n", param->fram++, (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec);
-
-		printf("%.2f,%.2f,%.2f %.2f,%.2f,%.2f \n", camera->coord.x, camera->coord.y, camera->coord.z, axis.x, axis.y, axis.z);
+		printf("╔════════════════════════════════╗\n");
+		printf("║ 화면   : %-20d  ║\n", param->fram++);
+		printf("║ 총시간 : %16ld m/s  ║\n", (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec);
+		printf("║ 위치   : %+6.2f,%+6.2f,%+6.2f  ║\n", camera->coord.x, camera->coord.y, camera->coord.z);
+		printf("║ 방향   : %+6.2f,%+6.2f,%+6.2f  ║\n", v3_move.x, v3_move.y, v3_move.z);
+		printf("║ 축회전 : %+6.2f,%+6.2f,%+6.2f  ║\n", axis.x / M_PI, axis.y / M_PI, axis.z / M_PI);
+		printf("╚════════════════════════════════╝\n");
 	}
 	return (0);
 }

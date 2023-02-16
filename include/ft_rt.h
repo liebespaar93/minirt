@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:31:13 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/12 07:43:21 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/12 23:05:56 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ typedef struct s_cy
 
 	t_gt	gt;
 
-	t_vec3	point;
-
+	double	radius;
 }	t_cy;
 
 

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:37:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/10 19:23:00 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/14 05:13:21 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_quaternion	ft_quaternion_from_euler_angles(t_vec3 angles)
  * 
  * @param q 
  * @ref https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
+ * @ref	https://stackoverflow.com/questions/5782658/extracting-yaw-from-a-quaternion
  * @return t_vec3 
  */
 t_vec3	ft_quaternion_to_euler_angles(t_quaternion q)
@@ -200,6 +201,27 @@ t_quaternion	ft_quaternion_rotation_z(double angle)
 	return (ft_quaternion_axis_from_angle(axis, angle));	
 }
 
+t_quaternion	ft_quaternion_rotation_xyz(t_vec3 angle)
+{
+	t_quaternion	q;
+
+	q = ft_quaternion_identity();
+	q = ft_quaternion_multiply(q, ft_quaternion_rotation_z(angle.z));
+	q = ft_quaternion_multiply(q, ft_quaternion_rotation_y(angle.y));
+	q = ft_quaternion_multiply(q, ft_quaternion_rotation_x(angle.x));
+
+	return (q);	
+}
+
+// t_vec3	ft_quaternion_rotation_back_xyz(t_quaternion q)
+// {
+// 	t_vec3	angle;
+// 	double	w;
+
+// 	angle = ft_quaternion_axis_to_angles(q, &w);
+// 	return (angle);	
+// }
+
 /**
  * @brief 4x4
  * 
@@ -233,6 +255,7 @@ double	ft_epsilon(double d)
  * @param q 
  * @ref https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation
  * @ref https://en.wikipedia.org/wiki/Rotation_matrix
+ * @ref https://automaticaddison.com/how-to-convert-a-quaternion-to-a-rotation-matrix/
  * @return t_mtx3
  */
 t_mtx3	ft_quaternion_rotate_matrix(t_quaternion q)

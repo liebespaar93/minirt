@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 13:25:40 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/05 05:39:09 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/14 05:37:04 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	ft_pixel_set_axis(t_scene *scene)
 		x = -scene->w * 0.5;
 		while (x < x_h)
 		{
-			q_trans = ft_quaternion_multiply(q, ft_quaternion_rotation_y(x * angle));
-			q_trans = ft_quaternion_multiply(q_trans, ft_quaternion_rotation_x(y * angle));
+			q_trans = ft_quaternion_multiply(q, ft_quaternion_rotation_xyz(ft_vector_3(y * angle, x * angle, 0.0)));
 			scene->pixel_q[l++] = q_trans;
 			x++;
 		}
