@@ -6,25 +6,25 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:02:21 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:04:24 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:11:44 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PARAM_H
 # define FT_PARAM_H
 
-# ifndef WIN_WIDTH
-# define WIN_WIDTH   600
+# ifndef WIN_W
+# define WIN_W   600
 # endif
 
-# ifndef WIN_HEIGHT
-# define WIN_HEIGHT  WIN_WIDTH / 2
+# ifndef WIN_H
+# define WIN_H  WIN_W / 2
 # endif
 
 # define SCENE_X		0
 # define SCENE_Y		0
-# define SCENE_WIDTH	WIN_WIDTH
-# define SCENE_HEIGHT	WIN_HEIGHT
+# define SCENE_W	WIN_W
+# define SCENE_H	WIN_H
 
 # include <stdbool.h>
 

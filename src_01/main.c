@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:07:04 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 04:11:44 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	ft_loop_event(t_param *param)
 	{
 		ft_render(param);
 		ft_memcpy(param->renderer->buffer, param->scene->image->back_buffer, \
-			param->renderer->size_line * SCENE_HEIGHT);
+			param->renderer->size_line * SCENE_H);
 		mlx_put_image_to_window(param->mlx->mlx_ptr, param->mlx->win_ptr, \
 			param->mlx->img_ptr, SCENE_X, SCENE_Y);
 		param->frame = 1;
@@ -115,7 +115,7 @@ int	main(int argc, char const *argv[])
 		ft_exit_error(ENOMEM);
 	param->rt = ft_rt_init(read_file);
 	ft_read_file_free(&read_file);
-	param->scene = ft_scene_init(param->rt, SCENE_WIDTH, SCENE_HEIGHT);
+	param->scene = ft_scene_init(param->rt, SCENE_W, SCENE_H);
 	ft_loop_event(param);
 	ft_mlx_key_mouse_win_set(param);
 	mlx_loop_hook(param->mlx->mlx_ptr, ft_loop_event, param);
@@ -144,7 +144,7 @@ int	ft_loop_event(t_param *param)
 	{
 		ft_render(param);
 		ft_memcpy(param->renderer->buffer, param->scene->image->back_buffer, \
-			param->renderer->size_line * SCENE_HEIGHT);
+			param->renderer->size_line * SCENE_H);
 		mlx_put_image_to_window(param->mlx->mlx_ptr, param->mlx->win_ptr, \
 			param->mlx->img_ptr, SCENE_X, SCENE_Y);
 		gettimeofday(&stop, NULL);
