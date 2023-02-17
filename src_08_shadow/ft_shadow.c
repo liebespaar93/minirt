@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:57 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/14 23:49:22 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 08:38:51 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,30 @@
 #include "ft_shadow.h"
 
 // 그림자
-bool	ft_shadow(t_scene *scene, t_vec3 *coord, t_intersection *intersection_obj)
+bool	ft_shadow(t_scene *scene, t_vec3 *coord, t_intersection *ip_obj)
 {
-	t_intersection	intersection;
+	t_intersection	ip;
 	t_vec3 			ray_point;
 	double			dist;
 	t_vec3			axis;
 	int				i;
 
 	i = 0;
-	axis = ft_vec3_sub(intersection_obj->hit_coord, *coord);
+	axis = ft_vec3_sub(ip_obj->hit_coord, *coord);
 	dist = sqrt(ft_vec3_dot(axis, axis)) - 0.000001;
 	ray_point = ft_vec3_normalize(axis);
 	while (i < scene->obj_list->max_index)
 	{
-		if (ft_scn_obj_intersection(scene->obj_list->rt[i], coord, &ray_point, &intersection))
+		if (ft_intersection_scn_obj(scene->obj_list->rt[i], coord, &ray_point, &ip))
 		{
-			intersection.obj = scene->obj_list->rt[i];
-			if (intersection.dist <= dist)
+			ip.obj = scene->obj_list->rt[i];
+			if (ip.dist <= dist)
 			{
 				return (true);
 			}
-			else if (intersection_obj->obj == intersection.obj)
+			else if (ip_obj->obj == ip.obj)
 			{
-				if (intersection.inside != intersection_obj->inside)
+				if (ip.inside != ip_obj->inside)
 					return (true);
 			}
 		}

@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-#    Updated: 2023/02/17 05:02:15 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/02/17 08:46:18 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,9 +100,16 @@ SRC_06_RENDER_SRC = ft_render.c
 SRC_06_RENDER_C = $(addprefix $(SRC_06_RENDER_DIR)/, $(SRC_06_RENDER_SRC))
 
 
-SRC_07_INTERSECTION_SRC =	ft_intersection.c	\
-							ft_intersection_obj.c	\
-							ft_intersection_light.c
+SRC_07_INTERSECTION_SRC =	ft_intersection.c				\
+							ft_intersection_obj.c			\
+							ft_intersection_obj_plane.c		\
+							ft_intersection_obj_sphere.c	\
+							ft_intersection_obj_cylinder.c	\
+							ft_intersection_obj_math.c		\
+							ft_intersection_light.c			\
+							ft_intersection_light_ambient.c	\
+							ft_intersection_light_light.c	\
+							ft_intersection_light_math.c
 					
 SRC_07_INTERSECTION_C = $(addprefix $(SRC_07_INTERSECTION_DIR)/, $(SRC_07_INTERSECTION_SRC))
 
