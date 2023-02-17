@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 08:46:25 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 09:03:41 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:18:04 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ double	ft_intersection_light_math_diffuse_reflection(
 }
 
 double	ft_intersection_light_math_specular_reflection(
-	const t_vec3 *ray_point, const t_vec3 *light_point, const t_vec3 *hit_point)
+	const t_vec3 *ray_point, const t_vec3 *light_point, \
+	const t_vec3 *hit_point)
 {
 	t_vec3	reflection;
 

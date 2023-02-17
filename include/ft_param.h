@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:02:21 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:11:44 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:13:20 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define FT_PARAM_H
 
 # ifndef WIN_W
-# define WIN_W   600
+#  define WIN_W   600
 # endif
 
 # ifndef WIN_H
-# define WIN_H  WIN_W / 2
+#  define WIN_H  300
 # endif
 
 # define SCENE_X		0
@@ -37,16 +37,14 @@
 
 typedef struct s_mlx
 {
-	/* data */
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
 
 }	t_mlx;
 
-typedef	struct s_renderer
+typedef struct s_renderer
 {
-	/* data */
 	char		*buffer;
 	int			bits_per_pixel;
 	int			size_line;
@@ -61,7 +59,7 @@ typedef struct s_param
 	t_renderer	*renderer;
 
 	t_rt		*rt;
-	
+
 	t_scene		*scene;
 
 	t_keyboard	*keyboard;

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 07:16:36 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/14 19:54:38 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 11:54:14 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,3 @@ t_mtx4	ft_mtx4_projection(double d)
 		(double [4]){0, 0, 1 / d, 1});
 	return (new);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:31:13 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:37:26 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:03:49 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ typedef struct s_A
 
 typedef struct s_C
 {
-	char	*type;
-	t_vec3	coord;
-	t_vec3	axis;
-	t_quaternion q_axis;
-	double	fov;
+	char			*type;
+	t_vec3			coord;
+	t_vec3			axis;
+	t_quaternion	q_axis;
+	double			fov;
 }	t_C;
 
 typedef struct s_L
@@ -85,16 +85,13 @@ typedef struct s_cy
 	double	radius;
 }	t_cy;
 
-
 t_rt	*ft_rt_init(t_read_file *read_file);
 void	ft_rt_free(t_rt **rt_ptr);
 
-void ft_rt_addback(t_rt *rt, char *type, void *data);
+void	ft_rt_addback(t_rt *rt, char *type, void *data);
 
 t_vec3	ft_rt_color(char *str);
 t_vec3	ft_rt_vec3(char *str);
-
-
 
 void	ft_rt_ambient_lightning(t_rt *rt, char *str);
 void	ft_rt_ambient_lightning_free(t_A **rt_a_ptr);

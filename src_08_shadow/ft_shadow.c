@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:15:57 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 08:38:51 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/17 09:22:05 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 #include "ft_shadow.h"
 
-// 그림자
 bool	ft_shadow(t_scene *scene, t_vec3 *coord, t_intersection *ip_obj)
 {
 	t_intersection	ip;
-	t_vec3 			ray_point;
+	t_vec3			ray_point;
 	double			dist;
 	t_vec3			axis;
 	int				i;
@@ -29,18 +28,14 @@ bool	ft_shadow(t_scene *scene, t_vec3 *coord, t_intersection *ip_obj)
 	ray_point = ft_vec3_normalize(axis);
 	while (i < scene->obj_list->max_index)
 	{
-		if (ft_intersection_scn_obj(scene->obj_list->rt[i], coord, &ray_point, &ip))
+		if (ft_intersection_scn_obj(\
+			scene->obj_list->rt[i], coord, &ray_point, &ip))
 		{
 			ip.obj = scene->obj_list->rt[i];
 			if (ip.dist <= dist)
-			{
 				return (true);
-			}
-			else if (ip_obj->obj == ip.obj)
-			{
-				if (ip.inside != ip_obj->inside)
-					return (true);
-			}
+			else if (ip_obj->obj == ip.obj && ip.inside != ip_obj->inside)
+				return (true);
 		}
 		i++;
 	}

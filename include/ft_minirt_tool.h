@@ -6,14 +6,14 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:54:18 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:59:10 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:08:39 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MINIRT_TOOL_H
 # define FT_MINIRT_TOOL_H
 
-#include <sys/_types/_size_t.h>
+# include <sys/_types/_size_t.h>
 
 typedef struct s_list		t_list;
 
@@ -26,15 +26,14 @@ typedef struct s_list
 typedef union s_color
 {
 	unsigned int	integer;
-	struct bit
+	struct s_bit
 	{
-		unsigned char a;
-		unsigned char r;
-		unsigned char g;
-		unsigned char b;
+		unsigned char	a;
+		unsigned char	r;
+		unsigned char	g;
+		unsigned char	b;
 	} bit;
 }	t_color;
-
 
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
@@ -47,7 +46,6 @@ int		ft_lst_len(t_list **lst);
 char	*ft_lst_malloc(t_list **lst);
 void	ft_lstadd_back(t_list **lst, t_list *new_lst);
 t_list	*ft_lstnew(void *content);
-
 
 int		ft_ptrlen(void **ptr, char *type);
 void	*ft_ptrcpy(void **ptr, void *cpy_ptr);
@@ -64,7 +62,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 char	**ft_split(char const *s, char c);
 void	**ft_split_free(char **split_all);
-
 
 int		ft_atoi(const char *str);
 double	ft_atof(const char *str);

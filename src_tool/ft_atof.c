@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 12:44:47 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/12/25 16:06:48 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:23:23 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_atof_decimal(const char *str, double *f, int sign)
 {
 	double	pv;
 	int		len;
-	
+
 	len = 0;
 	pv = 0.1;
 	while (ft_isdigit(*str))
@@ -61,7 +61,7 @@ void	ft_atof_e(const char *str, double *f, int sign)
 {
 	double	pv;
 	int		num;
-	
+
 	if (*str == '-' && str++)
 		pv = 0.1;
 	else

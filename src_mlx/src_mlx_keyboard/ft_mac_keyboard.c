@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:23:44 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/03 18:18:12 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 01:57:42 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 #include "ft_mac_keyboard.h"
 #include "ft_minirt_tool.h"
 
-t_keyboard	*ft_keyboard_set()
+t_keyboard	*ft_keyboard_set(void)
 {
 	t_keyboard	*keyboard;
 
 	if (!ft_zeromalloc((void **)&keyboard, sizeof(t_keyboard)))
 		ft_exit_print_error(ENOMEM, "ft_keyboard_set()");
-
 	return (keyboard);
 }
 
@@ -37,8 +36,6 @@ int	ft_key_up(int keycode, t_keyboard *keyboard)
 		return (1);
 	return (0);
 }
-#include <stdio.h>
-
 
 int	ft_key_down(int keycode, t_keyboard *keyboard)
 {

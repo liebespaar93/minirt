@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:30:14 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/29 14:49:53 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 01:58:01 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 #include "ft_mac_mouse.h"
 #include "ft_minirt_tool.h"
 
-t_mouse	*ft_mouse_set()
+t_mouse	*ft_mouse_set(void)
 {
 	t_mouse	*mouse;
 
 	if (!ft_zeromalloc((void **)&mouse, sizeof(t_mouse)))
 		ft_exit_print_error(ENOMEM, "ft_mouse_set()");
-
 	return (mouse);
 }
 

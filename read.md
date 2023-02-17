@@ -1,1 +1,1 @@
-gcc src_01/**.c src_02_fd/**.c src_tool/**.c  src_03_param/**.c  -I include  -I include/mlx  -L ./modules/minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
+미니알티 입니다

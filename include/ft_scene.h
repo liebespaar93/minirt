@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:50:06 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/12 19:08:33 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:07:37 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,15 @@
 
 typedef struct s_scene
 {
-	/* data */
-	int		w;
-	int		h;
-	int		pixel_size;
-	
+	int				w;
+	int				h;
+	int				pixel_size;
+
 	t_quaternion	*pixel_q;
-
-	t_scn_image			*image;
-	
+	t_scn_image		*image;
 	t_scn_camera	*camera_list;
-
 	t_scn_light		*light_list;
-
 	t_scn_obj		*obj_list;
-	
 }	t_scene;
 
 t_scene	*ft_scene_init(t_rt *rt, int x_size, int y_size);

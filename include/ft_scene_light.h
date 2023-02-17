@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:50:28 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/12 20:15:05 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:10:13 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,15 @@
 
 # include "ft_rt.h"
 
-typedef	struct s_scn_light
+typedef struct s_scn_light
 {
-	/* data */
 	int		index;
 	int		max_index;
 
 	t_rt	**rt;
-	
 }	t_scn_light;
 
-
 t_scn_light	*ft_scn_light_set(t_rt *rt);
-void	ft_scn_light_free(t_scn_light **light_ptr);
+void		ft_scn_light_free(t_scn_light **light_ptr);
 
 #endif

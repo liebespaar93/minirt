@@ -5,12 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/12 08:58:54 by kyoulee           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/02/17 08:46:18 by kyoulee          ###   ########.fr        #
-=======
-#    Updated: 2023/02/17 05:02:15 by kyoulee          ###   ########.fr        #
->>>>>>> 876d3376c1de09157fc762e40d8c8b91b9b95545
+#    Created: 2023/02/18 01:52:31 by kyoulee           #+#    #+#              #
+#    Updated: 2023/02/18 02:30:06 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +18,8 @@ CFLAGS = -Wall -Werror -Wextra
 DFLAGS = $(NULL) -g
 IFLAGS =					\
 	-I $(INCLUDE_DIR)		\
-	-I $(INCLUDE_MIX_DIR)
+	-I $(INCLUDE_MIX_DIR)	\
+	-I $(MINILIBX_DIR)
 LDFLAGS =						\
 	-L $(MINILIBX_DIR)
 LDLIBS =											\
@@ -165,6 +162,7 @@ SRC_MATRIX_SRC =						\
 				ft_matrix_2_mult.c		\
 				ft_matrix_3.c			\
 				ft_matrix_3_mult.c		\
+				ft_matrix_3_inverse.c	\
 				ft_matrix_4.c			\
 				ft_matrix_4_rotation.c	\
 				ft_matrix_4_mult.c		\
@@ -174,7 +172,12 @@ SRC_MATRIX_SRC =						\
 SRC_MATRIX_C = $(addprefix $(SRC_MATRIX_DIR)/, $(SRC_MATRIX_SRC))
 
 
-SRC_QUATERNION_SRC =	ft_quaternion.c
+SRC_QUATERNION_SRC =	ft_quaternion.c				\
+						ft_quaternion_aixs.c		\
+						ft_quaternion_euler.c		\
+						ft_quaternion_matrix.c		\
+						ft_quaternion_operator.c	\
+						ft_quaternion_roration.c
 
 SRC_QUATERNION_C = $(addprefix $(SRC_QUATERNION_DIR)/, $(SRC_QUATERNION_SRC))
 
