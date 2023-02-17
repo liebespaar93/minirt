@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:06:43 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:45:40 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 07:40:33 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_rt_check(t_rt *rt)
 	index = 0;
 	while (index < 2)
 	{
-		if (checker[index] < 1)
+		if (checker[index] != 1)
 			ft_exit_print_error(EBADF, "ft_rt_check()");
 		index++;
 	}
