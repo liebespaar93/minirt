@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 23:12:12 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/18 02:19:08 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 07:03:15 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ bool	ft_intersection_obj_plane(t_pl *obj, t_vec3 coord, \
 	t_vec3 *ray_point, t_intersection *ip);
 
 bool	ft_intersection_obj_cylinder(\
-	t_cy *obj, t_vec3 coord, t_vec3 *ray_point, t_intersection *ip);
+	t_cy *obj, t_vec3 back_coord, t_vec3 *back_ray_point, t_intersection *ip);
 #endif

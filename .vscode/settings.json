@@ -46,6 +46,9 @@
 		"ft_render.h": "c",
 		"ft_fd.h": "c",
 		"ft_mac_win.h": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"__split_buffer": "c",
+		"string": "c",
+		"string_view": "c"
 	}
 }

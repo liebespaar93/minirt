@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 07:02:31 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/18 06:57:01 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 07:13:37 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,25 +167,17 @@ bool	ft_obj_cylinder_intersection_side(
  * @return false 
  */
 bool	ft_intersection_obj_cylinder(
-	t_cy *obj, t_vec3 coord, t_vec3 *ray_point, t_intersection *ip)
+	t_cy *obj, t_vec3 back_coord, t_vec3 *back_ray_point, t_intersection *ip)
 {
 	t_intersection	ip_base;
 	t_intersection	ip_side;
 	bool			result_base;
 	bool			result_side;
 
-	t_vec3	back_coord;
-	t_vec3	back_ray;
-	t_quaternion q = ft_quaternion_rotation_xyz(ft_vec3_mult(obj->axis, M_PI));
-	
-	back_coord = ft_vec3_sub(coord, obj->coord);
-	back_coord = ft_quaternion_rotate_vec3(q, back_coord);
-	back_ray = ft_quaternion_rotate_vec3(q, *ray_point);
-	
-	result_side = \
-		ft_obj_cylinder_intersection_side(obj, back_coord, &back_ray, &ip_side);
-	result_base = \
-		ft_obj_cylinder_intersection_base(obj, back_coord, &back_ray, &ip_base);
+	result_side = ft_obj_cylinder_intersection_side(\
+		obj, back_coord, back_ray_point, &ip_side);
+	result_base = ft_obj_cylinder_intersection_base(\
+		obj, back_coord, back_ray_point, &ip_base);
 	if (!result_side && !result_base)
 		return (false);
 	if (result_side && result_base)
@@ -199,9 +191,5 @@ bool	ft_intersection_obj_cylinder(
 		*ip = ip_side;
 	else if (result_base)
 		*ip = ip_base;
-	q = ft_quaternion_inverse(q);
-	ip->hit_coord = ft_quaternion_rotate_vec3(q, ip->hit_coord);
-	ip->hit_coord = ft_vec3_add(ip->hit_coord, obj->coord);
-	ip->hit_point = ft_quaternion_rotate_vec3(q, ip->hit_point);
 	return (true);
 }
