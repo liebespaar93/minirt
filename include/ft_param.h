@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:02:21 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/18 02:13:20 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 04:11:14 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct s_param
 
 	t_keyboard	*keyboard;
 	t_mouse		*mouse;
-	int			frame;
 }	t_param;
 
 t_param	*ft_param_init(void);

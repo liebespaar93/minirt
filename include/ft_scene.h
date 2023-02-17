@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:50:06 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/18 02:07:37 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 04:11:22 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_scene
 	int				w;
 	int				h;
 	int				pixel_size;
+	int				frame;
 
 	t_quaternion	*pixel_q;
 	t_scn_image		*image;

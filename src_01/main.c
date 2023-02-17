@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:35:58 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/17 04:24:53 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 02:51:29 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,14 @@ int	ft_loop_event(t_param *param)
 {
 	if (ft_key_update(param->scene, param->keyboard) || \
 		ft_mouse_update(param->scene, param->mouse) \
-		|| !param->frame)
+		|| !param->scene->frame)
 	{
 		ft_render(param);
 		ft_memcpy(param->renderer->buffer, param->scene->image->back_buffer, \
 			param->renderer->size_line * SCENE_H);
 		mlx_put_image_to_window(param->mlx->mlx_ptr, param->mlx->win_ptr, \
 			param->mlx->img_ptr, SCENE_X, SCENE_Y);
-		param->frame = 1;
+		param->scene->frame = 1;
 	}
 	return (0);
 }

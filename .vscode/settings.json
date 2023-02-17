@@ -45,6 +45,7 @@
 		"time.h": "c",
 		"ft_render.h": "c",
 		"ft_fd.h": "c",
-		"ft_mac_win.h": "c"
+		"ft_mac_win.h": "c",
+		"fcntl.h": "c"
 	}
 }

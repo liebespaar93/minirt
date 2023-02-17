@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:37:28 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/18 02:21:48 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/02/18 06:38:55 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ t_quaternion	ft_quaternion_rotation_xyz(t_vec3 angle);
 t_quaternion	ft_quaternion_multiply(t_quaternion q1, t_quaternion q2);
 t_mtx3			ft_quaternion_rotate_matrix(t_quaternion q);
 t_vec3			ft_quaternion_rotate_vec3(t_quaternion q, t_vec3 v3);
+t_quaternion	ft_quaternion_inverse(t_quaternion q);
 
 #endif

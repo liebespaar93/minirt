@@ -6,7 +6,7 @@
 #    By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/18 01:52:31 by kyoulee           #+#    #+#              #
-#    Updated: 2023/02/18 02:30:06 by kyoulee          ###   ########.fr        #
+#    Updated: 2023/02/18 06:17:08 by kyoulee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -236,7 +236,7 @@ all : $(TARGET)
 $(OBJ_DIR) : 
 	mkdir $@
 
-$(TARGET) : $(OBJ_DIR) $(MINILIBX) $(OBJS) $(TARGET) 
+$(TARGET) : $(OBJ_DIR) $(MINILIBX) $(OBJS)
 	$(CC) $(CFLAGS) $(IFLAGS) $(DFLAGS) $(LDFLAGS) $(LDLIBS) $(OBJS) -o $(TARGET)
 	@echo "$(FG_LMAGENTA)$(CC) $(FG_BLUE) $(CFLAGS)"
 	@(for i in $(IFLAGS) $(LDFLAGS); do echo $$i; done)
