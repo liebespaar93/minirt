@@ -41,6 +41,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 int		ft_isdigit(int c);
+int		ft_is_end_space(char str);
 
 int		ft_lst_len(t_list **lst);
 char	*ft_lst_malloc(t_list **lst);
@@ -64,6 +65,7 @@ char	**ft_split(char const *s, char c);
 void	**ft_split_free(char **split_all);
 
 int		ft_atoi(const char *str);
+int		ft_atoi_len(const char *str);
 double	ft_atof(const char *str);
 
 void	ft_exit_error(int error);

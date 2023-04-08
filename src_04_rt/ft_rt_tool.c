@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <errno.h>
+#include <stdio.h>
 
 #include "ft_minirt_tool.h"
 #include "ft_rt.h"
@@ -31,6 +32,11 @@ t_vec3	ft_rt_color(char *str)
 
 	temp = ft_split(str, ',');
 	if (ft_ptrlen((void **)&temp, "char **") != 3)
+		ft_exit_print_error(EBADF, "ft_rt_color()");
+	if ((!ft_is_end_space(*(temp[0] + ft_atoi_len(temp[0]))) \
+		|| !ft_is_end_space(*(temp[1] + ft_atoi_len(temp[1]))) \
+		|| !ft_is_end_space(*(temp[2] + ft_atoi_len(temp[2])))) \
+		&& printf("%s \n", str))
 		ft_exit_print_error(EBADF, "ft_rt_color()");
 	color.x = ft_color_check(ft_atoi(temp[0])) / 255.0;
 	color.y = ft_color_check(ft_atoi(temp[1])) / 255.0;

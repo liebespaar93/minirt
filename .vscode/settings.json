@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "ft_get_next_line.h": "c",
+        "ft_minirt_tool.h": "c",
+        "errno.h": "c",
+        "ft_rt.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c",
+        "ft_vector.h": "c"
+    }
+}

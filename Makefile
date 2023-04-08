@@ -127,6 +127,7 @@ SRC_TOOL_SRC =					\
 				ft_calloc.c			\
 				ft_error.c			\
 				ft_isdigit.c		\
+				ft_is_end_space.c	\
 				ft_lst_len.c		\
 				ft_lst_malloc.c		\
 				ft_lstadd_back.c	\

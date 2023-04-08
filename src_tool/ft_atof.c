@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <math.h>
+#include <errno.h>
 
 #include "ft_minirt_tool.h"
 
@@ -57,29 +58,36 @@ int	ft_atof_decimal(const char *str, double *f, int sign)
 	return (len);
 }
 
-void	ft_atof_e(const char *str, double *f, int sign)
+int	ft_atof_e(const char *str, double *f, int sign)
 {
 	double	pv;
 	int		num;
+	int		len;
 
-	if (*str == '-' && str++)
+	len = 0;
+	if (*str == '-' && str++ && ++len)
 		pv = 0.1;
 	else
 		pv = 10;
 	if (!ft_isdigit(*str))
-		return ;
+		return (len);
 	num = ft_atoi(str);
 	while (num--)
 	{
 		if (*f > *f * pv)
 		{
 			*f = ft_atof_overflow(sign);
-			return ;
+			return (len + ft_atoi_len(str));
 		}
 		*f *= pv;
 	}
+	return (len + ft_atoi_len(str));
 }
 
+/**
+ * ref : https://www.ibm.com/docs/en/i/7.4?topic=functions-atof-convert-character-string-float
+**/
+#include <stdio.h>
 double	ft_atof(const char *str)
 {
 	double	f;
@@ -93,11 +101,14 @@ double	ft_atof(const char *str)
 		if (*str++ == '-')
 			sign = -1;
 	str += ft_atof_integer(str, &f, sign);
-	if (*str++ != '.')
-		return (f * sign);
-	str += ft_atof_decimal(str, &f, sign);
-	if (!ft_strchr("Ee", *str++))
-		return (f * sign);
-	ft_atof_e(str, &f, sign);
+	if (*str == '.' && str++)
+		str += ft_atof_decimal(str, &f, sign);
+	if (ft_strchr("Ee", *str) && str++)
+		str += ft_atof_e(str, &f, sign);
+	if (*str == 'f')
+		str++;
+	if (!(!*str || (0x09 <= *str && *str <= 0x0d) || *str == 0x20)\
+		&& printf("%s \n", str))
+		ft_exit_print_error(EBADF, "ft_atof()");
 	return (f * sign);
 }
