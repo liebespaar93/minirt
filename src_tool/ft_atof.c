@@ -6,12 +6,13 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 12:44:47 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/02/18 02:23:23 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/04/13 10:51:43 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <errno.h>
+#include <stdio.h>
 
 #include "ft_minirt_tool.h"
 
@@ -85,9 +86,9 @@ int	ft_atof_e(const char *str, double *f, int sign)
 }
 
 /**
- * ref : https://www.ibm.com/docs/en/i/7.4?topic=functions-atof-convert-character-string-float
+ * ref : https://www.ibm.com/docs/
+ * en/i/7.4?topic=functions-atof-convert-character-string-float
 **/
-#include <stdio.h>
 double	ft_atof(const char *str)
 {
 	double	f;
@@ -107,7 +108,7 @@ double	ft_atof(const char *str)
 		str += ft_atof_e(str, &f, sign);
 	if (*str == 'f')
 		str++;
-	if (!(!*str || (0x09 <= *str && *str <= 0x0d) || *str == 0x20)\
+	if (!(!*str || (0x09 <= *str && *str <= 0x0d) || *str == 0x20) \
 		&& printf("%s \n", str))
 		ft_exit_print_error(EBADF, "ft_atof()");
 	return (f * sign);
