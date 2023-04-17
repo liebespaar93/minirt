@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 12:44:47 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/04/13 10:51:43 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/04/17 20:29:58 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,9 @@ double	ft_atof(const char *str)
 		str += ft_atof_e(str, &f, sign);
 	if (*str == 'f')
 		str++;
-	if (!(!*str || (0x09 <= *str && *str <= 0x0d) || *str == 0x20) \
-		&& printf("%s \n", str))
+	while ((0x09 <= *str && *str <= 0x0d) || *str == 0x20)
+		str++;
+	if (*str && printf("%s \n", str))
 		ft_exit_print_error(EBADF, "ft_atof()");
 	return (f * sign);
 }
