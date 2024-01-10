@@ -61,7 +61,7 @@ bool	ft_intersection_light(
 			scene, scene->light_list->rt[i], &light_color, ip))
 		{
 			all_color = ft_vec3_add(all_color, light_color);
-			light_count++;
+			light_count = light_count + 1;
 		}
 		i++;
 	}
